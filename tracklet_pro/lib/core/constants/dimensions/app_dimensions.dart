@@ -6,6 +6,8 @@ class AppDimensions {
 
   // Border Radius
   static const double borderRadiusSmall = 4.0;
+  static const double borderRadiusNormal= 10.0;
+  static const double borderRadiusExtra= 6.0;
   static const double borderRadiusDefault = 8.0;
   static const double borderRadiusLarge = 16.0;
 

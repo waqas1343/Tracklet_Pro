@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
-import 'package:tracklet_pro/features/auth/presentation/screens/login_screen/login_screen.dart';
+import 'package:tracklet_pro/features/plant/presentation/bottom_navbar/plant_bottom_navbar.dart';
 import 'package:tracklet_pro/shared/widgets/custom_button.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -66,7 +66,9 @@ class OnboardingScreen extends StatelessWidget {
               onPressed: () {
                 // Navigate to login screen
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => const PlantBottomNavbar(),
+                  ),
                 );
               },
               text: 'GET STARTED',

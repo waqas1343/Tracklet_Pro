@@ -5,7 +5,7 @@ class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     primaryColor: AppColors.darkBlue,
-    scaffoldBackgroundColor: AppColors.lightBlueBackground,
+    scaffoldBackgroundColor: AppColors.white,
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.darkBlue,
       foregroundColor: AppColors.white,
@@ -84,8 +84,8 @@ class AppTheme {
       ),
       displaySmall: TextStyle(
         color: AppColors.black,
-        fontSize: 20,
-        fontWeight: FontWeight.w500,
+        fontSize: 22,
+        fontWeight: FontWeight.w400,
       ),
       headlineMedium: TextStyle(
         color: AppColors.black,

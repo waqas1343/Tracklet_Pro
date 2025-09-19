@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
 import 'package:tracklet_pro/core/constants/dimensions/app_dimensions.dart';
 
@@ -33,7 +34,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     final textTheme = theme.textTheme;
 
     return AppBar(
-      backgroundColor: AppColors.lightBlueBackground,
+      backgroundColor: AppColors.white,
       elevation: 0,
       automaticallyImplyLeading: false,
       title: Row(
@@ -54,18 +55,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           const Spacer(),
           if (showMessageIcon) ...[
             _buildIconButton(
-              icon: Icons.chat_bubble_outline,
+              iconPath: 'assets/icons/chat.svg',
               onPressed: onMessagePressed,
             ),
-            const SizedBox(width: AppDimensions.paddingSmall),
+            const SizedBox(width: AppDimensions.borderRadiusSmall),
           ],
 
           if (showNotificationIcon) ...[
             _buildIconButton(
-              icon: Icons.notifications_none,
+              iconPath: 'assets/icons/notification.svg',
               onPressed: onNotificationPressed,
             ),
-            const SizedBox(width: AppDimensions.paddingSmall),
+            const SizedBox(width: AppDimensions.borderRadiusSmall),
           ],
           ...?actions,
         ],
@@ -73,21 +74,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  Widget _buildIconButton({required IconData icon, VoidCallback? onPressed}) {
+  Widget _buildIconButton({required String iconPath, VoidCallback? onPressed}) {
     return Container(
-      width: 48,
-      height: 48,
+      width: 45,
+      height: 45,
       decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: AppColors.darkGrey.withOpacity(0.5),
-          width: 1,
-        ),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: AppColors.darkGrey, width: 0.5),
       ),
       child: IconButton(
-        icon: Icon(icon, size: 24, color: AppColors.darkGrey),
+        icon: SvgPicture.asset(
+          iconPath,
+          width: 20,
+          height: 20,
+          colorFilter: ColorFilter.mode(AppColors.darkGrey, BlendMode.srcIn),
+        ),
         onPressed: onPressed,
-        padding: EdgeInsets.zero,
       ),
     );
   }
