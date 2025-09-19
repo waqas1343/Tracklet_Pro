@@ -4,6 +4,7 @@ import 'package:tracklet_pro/features/auth/presentation/providers/password_visib
 import 'package:tracklet_pro/features/auth/presentation/providers/login_provider.dart';
 import 'package:tracklet_pro/features/language_selection/providers/language_provider.dart';
 import 'package:tracklet_pro/features/plant/domain/providers/bottom_nav_provider.dart';
+import 'package:tracklet_pro/features/plant/presentation/providers/plant_summary_provider.dart';
 
 // A simple default provider class
 class AppProvider extends ChangeNotifier {
@@ -31,8 +32,9 @@ class AppProviders {
       create: (_) => BottomNavProvider(),
     ),
 
-    // Yahan aur providers add kar sakte ho
-    // Example:
-    // ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
+    // Plant Summary Provider
+    ChangeNotifierProvider<PlantSummaryProvider>(
+      create: (_) => PlantSummaryProvider(),
+    ),
   ];
 }

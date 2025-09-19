@@ -3,7 +3,7 @@ import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final double? width;
   final double? height;
   final bool isEnabled;
@@ -11,6 +11,9 @@ class CustomButton extends StatelessWidget {
   final MainAxisAlignment? alignment;
   final double? elevation;
   final bool isOutlined;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final double? borderRadius;
   static const EdgeInsets defaultPadding = EdgeInsets.symmetric(
     vertical: 14,
     horizontal: 24,
@@ -28,25 +31,31 @@ class CustomButton extends StatelessWidget {
     this.alignment,
     this.elevation,
     this.isOutlined = false,
+    this.backgroundColor,
+    this.textColor,
+    this.borderRadius,
   });
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    final buttonBgColor = isOutlined
-        ? Colors.transparent
-        : isDark
-        ? Colors.white
-        : AppColors.darkBlue;
+    // Always use provided background color if available, otherwise use theme
+    final buttonBgColor = backgroundColor ?? 
+        (isOutlined
+            ? Colors.transparent
+            : isDark
+                ? Colors.white
+                : AppColors.darkBlue);
 
-    final buttonTextColor = isDark ? Colors.black : Colors.white;
+    final buttonTextColor = textColor ?? (isDark ? Colors.black : Colors.white);
 
+    // For disabled state, use a lighter version of the background color
     final disabledBgColor = isOutlined
         ? Colors.transparent
         : isDark
         ? Colors.grey[300]!
-        : AppColors.darkBlue;
+        : Colors.grey[300]!;
 
     final disabledTextColor = isOutlined
         ? isDark
@@ -56,60 +65,38 @@ class CustomButton extends StatelessWidget {
         ? Colors.black54
         : Colors.white70;
 
-    final buttonStyle = isOutlined
-        ? OutlinedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            foregroundColor: buttonTextColor,
-            disabledForegroundColor: disabledTextColor,
-            side: BorderSide(
-              color: isEnabled ? AppColors.darkBlue : AppColors.darkBlue,
-              width: 1.5,
-            ),
-            elevation: 0,
-            padding: defaultPadding,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.0),
-            ),
-            textStyle: const TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.w600,
-              letterSpacing: 1.1,
-              color: AppColors.black,
-            ),
-          )
-        : ElevatedButton.styleFrom(
-            backgroundColor: buttonBgColor,
-            disabledBackgroundColor: disabledBgColor,
-            foregroundColor: buttonTextColor,
-            disabledForegroundColor: disabledTextColor,
-            elevation: 2.0,
-            shadowColor: AppColors.black,
-            padding: defaultPadding,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.0),
-            ),
-            textStyle: const TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.w600,
-              letterSpacing: 1.1,
-              color: AppColors.black,
-            ),
-          );
+    final buttonStyle = ElevatedButton.styleFrom(
+      backgroundColor: isEnabled ? buttonBgColor : disabledBgColor,
+      foregroundColor: isEnabled ? buttonTextColor : disabledTextColor,
+      elevation: elevation ?? 0,
+      padding: defaultPadding,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(borderRadius ?? defaultBorderRadius),
+        side: isOutlined
+            ? BorderSide(
+                color: isEnabled
+                    ? (textColor ?? buttonTextColor)
+                    : disabledTextColor,
+                width: 1.5,
+              )
+            : BorderSide.none,
+      ),
+      textStyle: TextStyle(
+        fontSize: 16.0,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 1.1,
+        color: isEnabled ? buttonTextColor : disabledTextColor,
+      ),
+    );
 
     return SizedBox(
       width: width ?? double.infinity,
       height: height ?? 48.0,
-      child: isOutlined
-          ? OutlinedButton(
-              onPressed: isEnabled ? onPressed : null,
-              style: buttonStyle as ButtonStyle?,
-              child: _buildButtonContent(buttonTextColor, disabledTextColor),
-            )
-          : ElevatedButton(
-              onPressed: isEnabled ? onPressed : null,
-              style: buttonStyle,
-              child: _buildButtonContent(buttonTextColor, disabledTextColor),
-            ),
+      child: ElevatedButton(
+        onPressed: isEnabled ? onPressed : null,
+        style: buttonStyle,
+        child: _buildButtonContent(buttonTextColor, disabledTextColor),
+      ),
     );
   }
 

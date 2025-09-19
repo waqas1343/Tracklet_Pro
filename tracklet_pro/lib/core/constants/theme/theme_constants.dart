@@ -90,7 +90,7 @@ class AppTheme {
       headlineMedium: TextStyle(
         color: AppColors.black,
         fontSize: 18,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w400,
       ),
       titleLarge: TextStyle(
         color: AppColors.black,
@@ -102,12 +102,16 @@ class AppTheme {
         fontSize: 14,
         fontWeight: FontWeight.w400,
       ),
-      bodyMedium: TextStyle(color: AppColors.black, fontSize: 12),
+      bodyMedium: TextStyle(color: AppColors.black, fontSize: 12,fontWeight: FontWeight.w300),
       labelLarge: TextStyle(
         color: AppColors.mediumBlue,
         fontWeight: FontWeight.w600,
       ),
-      labelSmall: TextStyle(color: AppColors.darkGrey, fontSize: 11),
+      labelSmall: TextStyle(
+        color: AppColors.darkGrey,
+        fontSize: 10,
+        fontWeight: FontWeight.w400,
+      ),
     ),
     dividerColor: AppColors.softBlue,
     sliderTheme: SliderThemeData(
