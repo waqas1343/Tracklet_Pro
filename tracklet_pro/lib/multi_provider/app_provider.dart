@@ -5,6 +5,7 @@ import 'package:tracklet_pro/features/auth/presentation/providers/login_provider
 import 'package:tracklet_pro/features/language_selection/providers/language_provider.dart';
 import 'package:tracklet_pro/features/plant/domain/providers/bottom_nav_provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/providers/plant_summary_provider.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/provider/employe_provider.dart';
 
 // A simple default provider class
 class AppProvider extends ChangeNotifier {
@@ -35,6 +36,9 @@ class AppProviders {
     // Plant Summary Provider
     ChangeNotifierProvider<PlantSummaryProvider>(
       create: (_) => PlantSummaryProvider(),
+    ),
+    ChangeNotifierProvider<EmployeeProvider>(
+      create: (_) => EmployeeProvider(),
     ),
   ];
 }
