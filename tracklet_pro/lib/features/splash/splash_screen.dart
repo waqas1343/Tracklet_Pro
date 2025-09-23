@@ -41,12 +41,12 @@ class _SplashUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
+    return const Padding(
+      padding: EdgeInsets.all(24.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
+          Text(
             'Tracklet Pro',
             style: TextStyle(
               color: AppColors.white,
@@ -55,7 +55,7 @@ class _SplashUI extends StatelessWidget {
               letterSpacing: 1.2,
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           LoadingIndicator(
             color: AppColors.white,
             isLarge: true,

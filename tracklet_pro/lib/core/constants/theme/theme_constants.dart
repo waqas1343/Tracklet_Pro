@@ -6,7 +6,7 @@ class AppTheme {
     brightness: Brightness.light,
     primaryColor: AppColors.darkBlue,
     scaffoldBackgroundColor: AppColors.white,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.darkBlue,
       foregroundColor: AppColors.white,
       elevation: 2,
@@ -17,7 +17,7 @@ class AppTheme {
         fontWeight: FontWeight.bold,
       ),
     ),
-    iconTheme: IconThemeData(color: AppColors.darkBlue),
+    iconTheme: const IconThemeData(color: AppColors.darkBlue),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: AppColors.white,
@@ -44,7 +44,7 @@ class AppTheme {
       ),
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: AppColors.softBlue),
+        borderSide: const BorderSide(color: AppColors.softBlue),
       ),
       hintStyle: const TextStyle(
         color: AppColors.darkGrey,
@@ -71,7 +71,7 @@ class AppTheme {
       ),
       floatingLabelBehavior: FloatingLabelBehavior.auto,
     ),
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       displayLarge: TextStyle(
         color: AppColors.black,
         fontSize: 32,
@@ -114,13 +114,13 @@ class AppTheme {
       ),
     ),
     dividerColor: AppColors.softBlue,
-    sliderTheme: SliderThemeData(
+    sliderTheme: const SliderThemeData(
       activeTrackColor: AppColors.mediumBlue,
       inactiveTrackColor: AppColors.softBlue,
       thumbColor: AppColors.mediumBlue,
       overlayColor: AppColors.mediumBlue,
     ),
-    colorScheme: ColorScheme.light(
+    colorScheme: const ColorScheme.light(
       primary: AppColors.darkBlue,
       secondary: AppColors.softBlue,
       surface: AppColors.white,
@@ -135,7 +135,7 @@ class AppTheme {
     brightness: Brightness.dark,
     primaryColor: AppColors.softBlue,
     scaffoldBackgroundColor: AppColors.darkBlue,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.mediumBlue,
       foregroundColor: AppColors.white,
       elevation: 2,
@@ -146,36 +146,36 @@ class AppTheme {
         fontWeight: FontWeight.bold,
       ),
     ),
-    iconTheme: IconThemeData(color: AppColors.white),
+    iconTheme: const IconThemeData(color: AppColors.white),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: AppColors.mediumBlue,
-      contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: AppColors.softBlue),
+        borderSide: const BorderSide(color: AppColors.softBlue),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: AppColors.softBlue),
+        borderSide: const BorderSide(color: AppColors.softBlue),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: AppColors.white, width: 2),
+        borderSide: const BorderSide(color: AppColors.white, width: 2),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: Colors.redAccent),
+        borderSide: const BorderSide(color: Colors.redAccent),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: Colors.redAccent, width: 2),
+        borderSide: const BorderSide(color: Colors.redAccent, width: 2),
       ),
-      hintStyle: TextStyle(color: AppColors.white),
-      labelStyle: TextStyle(color: AppColors.white),
-      errorStyle: TextStyle(color: Colors.redAccent),
+      hintStyle: const TextStyle(color: AppColors.white),
+      labelStyle: const TextStyle(color: AppColors.white),
+      errorStyle: const TextStyle(color: Colors.redAccent),
     ),
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       displayLarge: TextStyle(
         color: AppColors.white,
         fontSize: 32,
@@ -209,13 +209,13 @@ class AppTheme {
       ),
     ),
     dividerColor: AppColors.softBlue,
-    sliderTheme: SliderThemeData(
+    sliderTheme: const SliderThemeData(
       activeTrackColor: AppColors.softBlue,
       inactiveTrackColor: AppColors.mediumBlue,
       thumbColor: AppColors.white,
       overlayColor: AppColors.white,
     ),
-    colorScheme: ColorScheme.dark(
+    colorScheme: const ColorScheme.dark(
       primary: AppColors.softBlue,
       secondary: AppColors.mediumBlue,
       surface: AppColors.mediumBlue,

@@ -27,30 +27,30 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: AppDimensions.paddingDefault * 1.5),
               SectionHeaderWidget(title: "New Orders", onSeeAll: () {}),
               const SizedBox(height: 8),
-              NewOrderCard(
+              const NewOrderCard(
                 traderName: "Arham Traders",
                 traderTitle:
                     "Arham Traders placed a request for\nmentioned cylinders",
                 driverName: "Romail Ahmed",
-                items: const ["50 KG (3)", "15 KG (5)"],
+                items: ["50 KG (3)", "15 KG (5)"],
               ),
               const SizedBox(height: AppDimensions.paddingDefault * 1.5),
 
               // Previous Orders Section
               SectionHeaderWidget(title: "Previous Orders", onSeeAll: () {}),
               const SizedBox(height: 12),
-              PreviousOrderCard(
+              const PreviousOrderCard(
                 traderName: "Arham Traders",
                 driverName: "Romail Ahmed",
-                items: const ["50 KG (3)", "15 KG (5)"],
+                items: ["50 KG (3)", "15 KG (5)"],
                 status: "Completed",
                 statusColor: Colors.green,
               ),
               const SizedBox(height: 12),
-              PreviousOrderCard(
+              const PreviousOrderCard(
                 traderName: "Arham Traders",
                 driverName: "Romail Ahmed",
-                items: const ["50 KG (3)", "15 KG (5)"],
+                items: ["50 KG (3)", "15 KG (5)"],
                 status: "Cancelled",
                 statusColor: Colors.red,
               ),

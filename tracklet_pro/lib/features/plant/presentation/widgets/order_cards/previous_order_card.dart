@@ -62,10 +62,10 @@ class PreviousOrderCard extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         ),
         const Spacer(),
-        CircleAvatar(
+        const CircleAvatar(
           radius: 20,
           backgroundColor: AppColors.darkBlue,
-          child: const Icon(
+          child: Icon(
             Icons.person,
             color: Colors.white,
             size: AppDimensions.iconDefault,
@@ -91,7 +91,7 @@ class PreviousOrderCard extends StatelessWidget {
         vertical: 4,
       ),
       decoration: BoxDecoration(
-        color: statusColor.withOpacity(0.2),
+        color: statusColor,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Text(

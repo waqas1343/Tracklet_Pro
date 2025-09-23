@@ -43,10 +43,10 @@ class CustomOrderCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 const Spacer(),
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 20,
                   backgroundColor: AppColors.darkBlue,
-                  child: const Icon(
+                  child: Icon(
                     Icons.person,
                     color: Colors.white,
                     size: AppDimensions.iconDefault,

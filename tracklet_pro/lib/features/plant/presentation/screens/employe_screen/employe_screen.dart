@@ -12,9 +12,9 @@ class EmployeeScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: CircleAvatar(
+        leading: const CircleAvatar(
           backgroundColor: Colors.blue,
-          child: const Text("BA", style: TextStyle(color: Colors.white)),
+          child: Text("BA", style: TextStyle(color: Colors.white)),
         ),
         title: const Text(
           "Bilal Ahmed",
@@ -27,14 +27,14 @@ class EmployeeScreen extends StatelessWidget {
           SizedBox(width: 16),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: const Padding(
+        padding: EdgeInsets.all(16.0),
         child: Column(
           children: [
             EmployeeSummary(),
-            const SizedBox(height: 20),
-            const AttendanceHeader(),
-            const SizedBox(height: 10),
+            SizedBox(height: 20),
+            AttendanceHeader(),
+            SizedBox(height: 10),
             Expanded(child: AttendanceList()),
           ],
         ),

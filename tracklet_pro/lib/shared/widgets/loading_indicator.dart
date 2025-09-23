@@ -188,7 +188,7 @@ class _TrackletLoadingPainter extends CustomPainter {
 
     // Draw animated arc
     paint.color = primaryColor;
-    final sweepAngle = 2.0 * 3.14 * 0.7; // 70% of the circle
+    const sweepAngle = 2.0 * 3.14 * 0.7; // 70% of the circle
     final startAngle =
         -3.14 / 2 + (progress * 3.14 * 2); // Rotating start angle
 
