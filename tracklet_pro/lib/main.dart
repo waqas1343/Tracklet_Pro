@@ -12,7 +12,6 @@ void main() {
 
 class TrackletApp extends StatelessWidget {
   const TrackletApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
