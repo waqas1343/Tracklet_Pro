@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/widgets/attendance_header.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/widgets/attendance_list.dart';
-import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/widgets/employe_summary.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/widgets/attendance_tabs.dart';
+import 'package:tracklet_pro/shared/widgets/custom_app_bar.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/add_employee_screen.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/widgets/attendance_search_field.dart';
 
 class EmployeeScreen extends StatelessWidget {
   const EmployeeScreen({super.key});
@@ -9,35 +11,27 @@ class EmployeeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: const CircleAvatar(
-          backgroundColor: Colors.blue,
-          child: Text("BA", style: TextStyle(color: Colors.white)),
-        ),
-        title: const Text(
-          "Bilal Ahmed",
-          style: TextStyle(color: Colors.black),
-        ),
-        actions: const [
-          Icon(Icons.chat_bubble_outline, color: Colors.black),
-          SizedBox(width: 12),
-          Icon(Icons.notifications_none, color: Colors.black),
-          SizedBox(width: 16),
-        ],
-      ),
+      appBar: CustomAppBar(),
       body: const Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: [
-            EmployeeSummary(),
-            SizedBox(height: 20),
-            AttendanceHeader(),
-            SizedBox(height: 10),
+            AttendanceSearchField(),
+            SizedBox(height: 12),
+            AttendanceTabs(),
+            SizedBox(height: 16),
             Expanded(child: AttendanceList()),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const AddEmployeeScreen()),
+          );
+        },
+        icon: const Icon(Icons.person_add_alt_1),
+        label: const Text('Add Employee'),
       ),
     );
   }

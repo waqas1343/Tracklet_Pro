@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/provider/employe_provider.dart';
+import 'package:tracklet_pro/shared/widgets/custom_button.dart';
 
 class EmployeeSummary extends StatelessWidget {
   const EmployeeSummary({super.key});
@@ -12,7 +14,6 @@ class EmployeeSummary extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Heading + Add Leave Button
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -20,71 +21,109 @@ class EmployeeSummary extends StatelessWidget {
               "Employee Summary",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.yellow[700],
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-              ),
-              onPressed: () {},
-              child: const Text("Add Leave"),
-            )
           ],
         ),
         const SizedBox(height: 12),
-
-        // Add Employee Button
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-            ),
-            onPressed: () {},
-            child: const Text("Add Employee"),
-          ),
-        ),
+        CustomButton(text: "Add Employee", onPressed: () {}),
         const SizedBox(height: 16),
-
-        // Summary Cards
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildCard("Total Employees", provider.totalEmployees.toString(),
-                Colors.blue),
-            _buildCard("Present Today", provider.presentCount.toString(),
-                Colors.green),
-            _buildCard("Absent Today", provider.absentCount.toString(),
-                Colors.red),
+            _buildCard(
+              context,
+              'total',
+              "Total Employees",
+              provider.totalEmployees.toString(),
+              "assets/icons/employee.svg",
+              Colors.blue,
+            ),
+            _buildCard(
+              context,
+              'present',
+              "Present Today",
+              provider.presentCount.toString(),
+              "assets/icons/user.svg",
+              Colors.green,
+            ),
+            _buildCard(
+              context,
+              'absent',
+              "Absent Today",
+              provider.absentCount.toString(),
+              "assets/icons/profile.svg",
+              Colors.red,
+            ),
           ],
         ),
       ],
     );
   }
 
-  Widget _buildCard(String title, String value, Color color) {
-    return Container(
-      width: 100,
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: Colors.grey.shade100,
-      ),
-      child: Column(
-        children: [
-          Text(title, textAlign: TextAlign.center, style: const TextStyle(fontSize: 12)),
-          const SizedBox(height: 5),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: color,
+  Widget _buildCard(
+    BuildContext context,
+    String cardKey,
+    String title,
+    String value,
+    String iconPath,
+    Color color,
+  ) {
+    final empProvider = Provider.of<EmployeeProvider>(context);
+    final bool isPressed = empProvider.pressedSummaryKey == cardKey;
+
+    return GestureDetector(
+      onTapDown: (_) => empProvider.setPressedSummaryKey(cardKey),
+      onTapUp: (_) => empProvider.setPressedSummaryKey(null),
+      onTapCancel: () => empProvider.setPressedSummaryKey(null),
+      onTap: () {},
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 150),
+        width: 100,
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: isPressed ? Colors.blue[900] : Colors.grey.shade100,
+          boxShadow: isPressed
+              ? [
+                  BoxShadow(
+                    color: Colors.blue.withOpacity(0.25),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ]
+              : null,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SvgPicture.asset(
+              iconPath,
+              width: 24,
+              height: 24,
+              colorFilter: ColorFilter.mode(
+                isPressed ? Colors.white : color,
+                BlendMode.srcIn,
+              ),
             ),
-          ),
-        ],
+            const SizedBox(height: 8),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 12,
+                color: isPressed ? Colors.white : Colors.black87,
+              ),
+            ),
+            const SizedBox(height: 5),
+            Text(
+              value,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: isPressed ? Colors.white : color,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

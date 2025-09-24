@@ -8,22 +8,42 @@ class AttendanceList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final employees = Provider.of<EmployeeProvider>(context).employees;
+    final employees = Provider.of<EmployeeProvider>(context).filteredEmployees;
 
     return Column(
       children: [
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           color: Colors.grey.shade200,
-          child: const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Employee ID",
-                style: TextStyle(fontWeight: FontWeight.bold),
+          child: Row(
+            children: const [
+              Expanded(
+                flex: 2,
+                child: Text(
+                  "ID",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-              Text("Name", style: TextStyle(fontWeight: FontWeight.bold)),
-              Text("Status", style: TextStyle(fontWeight: FontWeight.bold)),
+              SizedBox(width: 8),
+              Expanded(
+                flex: 3,
+                child: Text(
+                  "Name",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              SizedBox(width: 8),
+              Expanded(
+                flex: 3,
+                child: Text(
+                  "Status",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.right,
+                ),
+              ),
             ],
           ),
         ),
