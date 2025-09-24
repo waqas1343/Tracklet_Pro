@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:tracklet_pro/core/constants/assets/app_icons.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/provider/employe_provider.dart';
 import 'package:tracklet_pro/shared/widgets/custom_button.dart';
 
@@ -34,7 +35,7 @@ class EmployeeSummary extends StatelessWidget {
               'total',
               "Total Employees",
               provider.totalEmployees.toString(),
-              "assets/icons/employee.svg",
+              AppIcons.totalEmployees,
               Colors.blue,
             ),
             _buildCard(
@@ -42,7 +43,7 @@ class EmployeeSummary extends StatelessWidget {
               'present',
               "Present Today",
               provider.presentCount.toString(),
-              "assets/icons/user.svg",
+              AppIcons.present,
               Colors.green,
             ),
             _buildCard(
@@ -50,7 +51,7 @@ class EmployeeSummary extends StatelessWidget {
               'absent',
               "Absent Today",
               provider.absentCount.toString(),
-              "assets/icons/profile.svg",
+              AppIcons.absent,
               Colors.red,
             ),
           ],
