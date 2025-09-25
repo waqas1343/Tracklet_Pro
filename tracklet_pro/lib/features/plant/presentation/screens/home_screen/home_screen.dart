@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tracklet_pro/core/constants/dimensions/app_dimensions.dart';
-import 'package:tracklet_pro/features/plant/presentation/widgets/plant_summary/plant_summary_row.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/home_screen/widgets/plant_summary/plant_summary_row.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/home_screen/widgets/order_cards/new_order_card.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/home_screen/widgets/order_cards/previous_order_card.dart';
 import 'package:tracklet_pro/features/plant/presentation/widgets/section_header/section_header_widget.dart';
-import 'package:tracklet_pro/features/plant/presentation/widgets/order_cards/new_order_card.dart';
-import 'package:tracklet_pro/features/plant/presentation/widgets/order_cards/previous_order_card.dart';
 import 'package:tracklet_pro/shared/widgets/custom_app_bar.dart';
 
 class HomeScreen extends StatelessWidget {

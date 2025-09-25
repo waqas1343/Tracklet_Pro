@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tracklet_pro/core/constants/assets/app_icons.dart';
 import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
 import 'package:tracklet_pro/features/plant/presentation/providers/plant_summary_provider.dart';
-import 'package:tracklet_pro/features/plant/presentation/widgets/plant_summary_card/plant_summary_cards.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/home_screen/widgets/plant_summary_card/plant_summary_cards.dart';
 
 class PlantSummaryRow extends StatelessWidget {
   const PlantSummaryRow({super.key});

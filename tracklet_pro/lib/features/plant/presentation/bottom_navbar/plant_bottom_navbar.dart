@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
-import 'package:tracklet_pro/features/plant/domain/providers/bottom_nav_provider.dart';
+import 'package:tracklet_pro/features/plant/presentation/bottom_navbar/provider/bottom_nav_provider.dart';
 import '../screens/home_screen/home_screen.dart';
-import '../screens/employe_screen/employe_screen.dart';
-import '../screens/scan_screen/scan_screen.dart';
+import '../screens/rates_screen/rates_screen.dart';
 import '../screens/orders_screen/orders_screen.dart';
 import '../screens/stock_screen/stock_screen.dart';
 
@@ -14,8 +13,7 @@ class PlantBottomNavbar extends StatelessWidget {
 
   static const List<BottomNavItem> _navItems = [
     BottomNavItem(iconPath: 'assets/icons/home.svg', label: 'Home'),
-    BottomNavItem(iconPath: 'assets/icons/employee.svg', label: 'employee'),
-    BottomNavItem(iconPath: 'assets/icons/scan.svg', label: 'Scan'),
+    BottomNavItem(iconPath: 'assets/icons/employee.svg', label: 'Rates'),
     BottomNavItem(iconPath: 'assets/icons/order.svg', label: 'Orders'),
     BottomNavItem(iconPath: 'assets/icons/stock.svg', label: 'Stock'),
   ];
@@ -29,8 +27,7 @@ class PlantBottomNavbar extends StatelessWidget {
             index: navProvider.currentIndex,
             children: const [
               HomeScreen(),
-              EmployeeScreen(),
-              ScanScreen(),
+              RatesScreen(),
               OrdersScreen(),
               StockScreen(),
             ],

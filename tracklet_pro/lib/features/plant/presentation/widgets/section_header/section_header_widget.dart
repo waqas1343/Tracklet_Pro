@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tracklet_pro/core/constants/dimensions/app_dimensions.dart';
-import 'package:tracklet_pro/features/plant/presentation/widgets/see_all_button/see_all_button.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/home_screen/widgets/see_all_button/see_all_button.dart';
 
 class SectionHeaderWidget extends StatelessWidget {
   final String title;
