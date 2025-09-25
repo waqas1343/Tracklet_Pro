@@ -8,6 +8,14 @@ import '../screens/rates_screen/rates_screen.dart';
 import '../screens/orders_screen/orders_screen.dart';
 import '../screens/stock_screen/stock_screen.dart';
 
+// Pre-cache SVG icons
+final List<Widget> _screens = const [
+  HomeScreen(),
+  RatesScreen(),
+  OrdersScreen(),
+  StockScreen(),
+];
+
 class PlantBottomNavbar extends StatelessWidget {
   const PlantBottomNavbar({super.key});
 
@@ -22,49 +30,57 @@ class PlantBottomNavbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<BottomNavProvider>(
       builder: (context, navProvider, _) {
+        final currentIndex = navProvider.currentIndex;
+        
         return Scaffold(
-          body: IndexedStack(
-            index: navProvider.currentIndex,
-            children: const [
-              HomeScreen(),
-              RatesScreen(),
-              OrdersScreen(),
-              StockScreen(),
-            ],
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: AppColors.white,
-            currentIndex: navProvider.currentIndex,
-            onTap: navProvider.changeIndex,
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: AppColors.darkBlue,
-            unselectedItemColor: AppColors.darkGrey,
-            selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
-            unselectedLabelStyle: const TextStyle(
-              fontWeight: FontWeight.normal,
-            ),
-            items: _navItems.map((item) {
-              return BottomNavigationBarItem(
-                icon: Padding(
-                  padding: const EdgeInsets.only(bottom: 4.0),
-                  child: SvgPicture.asset(
-                    item.iconPath,
-                    colorFilter: ColorFilter.mode(
-                      navProvider.currentIndex == _navItems.indexOf(item)
-                          ? AppColors.darkBlue
-                          : AppColors.darkGrey,
-                      BlendMode.srcIn,
-                    ),
-                    width: 24,
-                    height: 24,
-                  ),
-                ),
-                label: item.label,
-              );
-            }).toList(),
-          ),
+          body: _screens[currentIndex],
+          bottomNavigationBar: _buildBottomNavBar(currentIndex, navProvider.changeIndex),
         );
       },
+    );
+  }
+
+  Widget _buildBottomNavBar(int currentIndex, ValueChanged<int> onTap) {
+    return BottomNavigationBar(
+      backgroundColor: AppColors.white,
+      currentIndex: currentIndex,
+      onTap: onTap,
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: AppColors.darkBlue,
+      unselectedItemColor: AppColors.darkGrey,
+      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
+      unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
+      items: List.generate(_navItems.length, (index) {
+        final item = _navItems[index];
+        final isSelected = currentIndex == index;
+        
+        return BottomNavigationBarItem(
+          icon: _buildNavIcon(
+            iconPath: item.iconPath,
+            isSelected: isSelected,
+          ),
+          label: item.label,
+        );
+      }),
+    );
+  }
+
+  Widget _buildNavIcon({
+    required String iconPath,
+    required bool isSelected,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4.0),
+      child: SvgPicture.asset(
+        iconPath,
+        colorFilter: ColorFilter.mode(
+          isSelected ? AppColors.darkBlue : AppColors.darkGrey,
+          BlendMode.srcIn,
+        ),
+        width: 24,
+        height: 24,
+        cacheColorFilter: true,
+      ),
     );
   }
 }

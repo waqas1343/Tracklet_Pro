@@ -34,7 +34,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     final textTheme = theme.textTheme;
 
     return AppBar(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.colorScheme.surface,
       elevation: 0,
       automaticallyImplyLeading: false,
       title: Row(
@@ -46,11 +46,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               backgroundColor: AppColors.darkBlue,
               child: Text(
                 userInitials,
-                style: textTheme.titleMedium?.copyWith(color: AppColors.white) ?? const TextStyle(
-                  color: AppColors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+                style:
+                    textTheme.titleMedium?.copyWith(color: AppColors.white) ??
+                    const TextStyle(
+                      color: AppColors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
             ),
           ),
@@ -91,7 +93,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           iconPath,
           width: 20,
           height: 20,
-          colorFilter: const ColorFilter.mode(AppColors.darkGrey, BlendMode.srcIn),
+          colorFilter: const ColorFilter.mode(
+            AppColors.darkGrey,
+            BlendMode.srcIn,
+          ),
         ),
         onPressed: onPressed,
       ),
