@@ -113,7 +113,6 @@ class SummaryTab extends StatelessWidget {
           isSelected ? Colors.white : color,
           BlendMode.srcIn,
         ),
-        cacheColorFilter: true,
       ),
     );
   }
