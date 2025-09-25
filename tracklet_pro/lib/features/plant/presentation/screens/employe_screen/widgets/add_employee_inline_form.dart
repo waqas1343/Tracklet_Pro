@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tracklet_pro/core/utils/snackbar_util/custom_flushbar.dart';
+import 'package:tracklet_pro/core/utils/validators/validators.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/provider/employe_provider.dart';
 import 'package:tracklet_pro/shared/widgets/custom_button.dart';
 
@@ -24,7 +25,7 @@ class _AddEmployeeInlineFormState extends State<AddEmployeeInlineForm> {
   }
 
   void _submit() {
-    if (!_formKey.currentState!.validate()) return;
+    if (!FormValidator.validateFormKey(_formKey)) return;
     final name = _nameController.text.trim();
     final designation = _designationController.text.trim();
     final provider = Provider.of<EmployeeProvider>(context, listen: false);
@@ -32,6 +33,7 @@ class _AddEmployeeInlineFormState extends State<AddEmployeeInlineForm> {
     provider.setSelectedTab(AttendanceTab.total);
     _nameController.clear();
     _designationController.clear();
+    FormValidator.resetForm(_formKey);
     CustomFlushbar.showSuccess(context, message: 'Employee "$name" added');
   }
 
@@ -42,33 +44,17 @@ class _AddEmployeeInlineFormState extends State<AddEmployeeInlineForm> {
       child: Row(
         children: [
           Expanded(
-            child: TextFormField(
+            child: ValidationBuilder.nameTextField(
               controller: _nameController,
-              decoration: const InputDecoration(
-                labelText: 'Employee Name',
-                hintText: 'Enter employee name',
-                border: OutlineInputBorder(),
-              ),
-              validator: (v) {
-                if (v == null || v.trim().isEmpty) return 'Name is required';
-                return null;
-              },
+              hintText: 'Enter employee name',
             ),
           ),
           const SizedBox(width: 12),
           Expanded(
-            child: TextFormField(
+            child: ValidationBuilder.requiredTextField(
               controller: _designationController,
-              decoration: const InputDecoration(
-                labelText: 'Designation',
-                hintText: 'Enter designation',
-                border: OutlineInputBorder(),
-              ),
-              validator: (v) {
-                if (v == null || v.trim().isEmpty)
-                  return 'Designation is required';
-                return null;
-              },
+              hintText: 'Enter designation',
+              validator: Validators.validateDesignation,
             ),
           ),
           const SizedBox(width: 12),

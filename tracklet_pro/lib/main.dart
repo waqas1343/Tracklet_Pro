@@ -7,7 +7,6 @@ import 'core/constants/theme/theme_constants.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
   runApp(const TrackletApp());
 }
 

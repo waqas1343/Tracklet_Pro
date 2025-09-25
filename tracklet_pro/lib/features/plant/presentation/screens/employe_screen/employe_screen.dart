@@ -25,6 +25,7 @@ class EmployeeScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
+        heroTag: 'employee_fab', // Unique hero tag
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (_) => const AddEmployeeScreen()),

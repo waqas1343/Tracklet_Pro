@@ -46,7 +46,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               backgroundColor: AppColors.darkBlue,
               child: Text(
                 userInitials,
-                style: textTheme.titleMedium?.copyWith(color: AppColors.white),
+                style: textTheme.titleMedium?.copyWith(color: AppColors.white) ?? const TextStyle(
+                  color: AppColors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),
@@ -79,7 +83,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       width: 45,
       height: 45,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusDefault),
         border: Border.all(color: AppColors.darkGrey, width: 0.5),
       ),
       child: IconButton(

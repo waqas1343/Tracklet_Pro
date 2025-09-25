@@ -19,6 +19,7 @@ class CustomTextField extends StatelessWidget {
   final bool autofocus;
   final FocusNode? focusNode;
   final TextCapitalization textCapitalization;
+  final String? Function(String?)? validator;
 
   const CustomTextField({
     super.key,
@@ -39,6 +40,7 @@ class CustomTextField extends StatelessWidget {
     this.autofocus = false,
     this.focusNode,
     this.textCapitalization = TextCapitalization.none,
+    this.validator,
   });
 
   @override
@@ -46,7 +48,7 @@ class CustomTextField extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    return TextField(
+    return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
       obscureText: obscureText,
@@ -54,7 +56,7 @@ class CustomTextField extends StatelessWidget {
       maxLines: maxLines,
       maxLength: maxLength,
       textInputAction: textInputAction,
-      onSubmitted: onSubmitted,
+      onFieldSubmitted: onSubmitted,
       autofocus: autofocus,
       focusNode: focusNode,
       textCapitalization: textCapitalization,
@@ -62,6 +64,7 @@ class CustomTextField extends StatelessWidget {
         color: isDark ? AppColors.white : AppColors.black,
       ),
       onChanged: onChanged,
+      validator: validator,
       decoration: InputDecoration(
         filled: true,
         fillColor: isDark ? AppColors.mediumBlue : AppColors.white,

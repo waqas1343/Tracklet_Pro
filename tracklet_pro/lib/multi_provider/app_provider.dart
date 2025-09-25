@@ -6,6 +6,9 @@ import 'package:tracklet_pro/features/language_selection/providers/language_prov
 import 'package:tracklet_pro/features/plant/presentation/bottom_navbar/provider/bottom_nav_provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/providers/plant_summary_provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/provider/employe_provider.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/rates_screen/provider/rate_provider/rate_provider.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/orders_screen/provider/orders_provider.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/stock_screen/provider/stock_provider.dart';
 
 // A simple default provider class
 class AppProvider extends ChangeNotifier {
@@ -37,6 +40,17 @@ class AppProviders {
     ChangeNotifierProvider<PlantSummaryProvider>(
       create: (_) => PlantSummaryProvider(),
     ),
+
+    // Employee Provider
     ChangeNotifierProvider<EmployeeProvider>(create: (_) => EmployeeProvider()),
+
+    // Rate Provider
+    ChangeNotifierProvider<RateProvider>(create: (_) => RateProvider()),
+
+    // Orders Provider
+    ChangeNotifierProvider<OrdersProvider>(create: (_) => OrdersProvider()),
+
+    // Stock Provider
+    ChangeNotifierProvider<StockProvider>(create: (_) => StockProvider()),
   ];
 }

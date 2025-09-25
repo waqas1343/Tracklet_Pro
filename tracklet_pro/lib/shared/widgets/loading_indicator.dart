@@ -66,6 +66,7 @@ class LoadingIndicator extends StatelessWidget {
     double size = 16.0,
     Color? color,
     bool withTrackletStyle = true,
+    required BuildContext context,
   }) {
     return SizedBox(
       width: size,
@@ -75,14 +76,14 @@ class LoadingIndicator extends StatelessWidget {
           : CircularProgressIndicator(
               strokeWidth: 2.0,
               valueColor: AlwaysStoppedAnimation<Color>(
-                color ?? Colors.grey[400]!,
+                color ?? Theme.of(context).disabledColor,
               ),
             ),
     );
   }
 
   // Full screen loading
-  static Widget fullScreen({String? message}) {
+  static Widget fullScreen({String? message, required BuildContext context}) {
     return Scaffold(
       body: Center(
         child: Column(
@@ -93,10 +94,7 @@ class LoadingIndicator extends StatelessWidget {
               const SizedBox(height: 16),
               Text(
                 message,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ],
           ],

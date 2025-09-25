@@ -33,7 +33,7 @@ class AttendanceTabs extends StatelessWidget {
             duration: const Duration(milliseconds: 150),
             padding: const EdgeInsets.symmetric(vertical: 12),
             decoration: BoxDecoration(
-              color: selected ? AppColors.mediumBlue : Colors.grey.shade200,
+              color: selected ? AppColors.mediumBlue : Theme.of(context).colorScheme.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(10),
             ),
             alignment: Alignment.center,
@@ -51,7 +51,7 @@ class AttendanceTabs extends StatelessWidget {
                           Text(
                             headerTop,
                             style: TextStyle(
-                              color: selected ? Colors.white70 : Colors.black54,
+                              color: selected ? Theme.of(context).colorScheme.onPrimary.withValues(alpha: 0.7) : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
                               fontWeight: FontWeight.w400,
                               fontSize: 12,
                             ),
@@ -60,7 +60,7 @@ class AttendanceTabs extends StatelessWidget {
                           Text(
                             headerBottom,
                             style: TextStyle(
-                              color: selected ? Colors.white : Colors.black87,
+                              color: selected ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface,
                               fontWeight: FontWeight.w600,
                               fontSize: 10,
                             ),
@@ -72,8 +72,8 @@ class AttendanceTabs extends StatelessWidget {
                         height: 30,
                         decoration: BoxDecoration(
                           color: selected
-                              ? Colors.white24
-                              : color.withOpacity(0.2),
+                              ? Theme.of(context).colorScheme.onPrimary.withValues(alpha: 0.2)
+                              : color.withValues(alpha: 0.2),
                           shape: BoxShape.circle,
                         ),
                         alignment: Alignment.center,
@@ -81,7 +81,10 @@ class AttendanceTabs extends StatelessWidget {
                           iconPath,
                           width: 20,
                           height: 20,
-                          color: selected ? Colors.white : color,
+                          colorFilter: ColorFilter.mode(
+                            selected ? Theme.of(context).colorScheme.onPrimary : color,
+                            BlendMode.srcIn,
+                          ),
 
                           placeholderBuilder: (context) =>
                               const CircularProgressIndicator(strokeWidth: 1.5),
@@ -96,7 +99,7 @@ class AttendanceTabs extends StatelessWidget {
                     child: Text(
                       label,
                       style: TextStyle(
-                        color: selected ? Colors.white : Colors.black87,
+                        color: selected ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface,
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
                       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -39,31 +38,26 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final theme = Theme.of(context);
 
     // Always use provided background color if available, otherwise use theme
-    final buttonBgColor = backgroundColor ?? 
+    final buttonBgColor = backgroundColor ??
         (isOutlined
             ? Colors.transparent
             : isDark
-                ? Colors.white
-                : AppColors.darkBlue);
+                ? theme.colorScheme.onPrimary
+                : theme.primaryColor);
 
-    final buttonTextColor = textColor ?? (isDark ? Colors.black : Colors.white);
+    final buttonTextColor = textColor ?? (isDark ? theme.colorScheme.onSurface : theme.colorScheme.onPrimary);
 
-    // For disabled state, use a lighter version of the background color
+    // For disabled state, use theme disabled colors
     final disabledBgColor = isOutlined
         ? Colors.transparent
-        : isDark
-        ? Colors.grey[300]!
-        : Colors.grey[300]!;
+        : theme.disabledColor;
 
     final disabledTextColor = isOutlined
-        ? isDark
-              ? Colors.grey[400]!
-              : AppColors.darkBlue
-        : isDark
-        ? Colors.black54
-        : Colors.white70;
+        ? theme.disabledColor
+        : theme.colorScheme.onSurface.withValues(alpha: 0.38);
 
     final buttonStyle = ElevatedButton.styleFrom(
       backgroundColor: isEnabled ? buttonBgColor : disabledBgColor,
@@ -81,7 +75,9 @@ class CustomButton extends StatelessWidget {
               )
             : BorderSide.none,
       ),
-      textStyle: TextStyle(
+      textStyle: theme.textTheme.labelLarge?.copyWith(
+        color: isEnabled ? buttonTextColor : disabledTextColor,
+      ) ?? TextStyle(
         fontSize: 16.0,
         fontWeight: FontWeight.w600,
         letterSpacing: 1.1,
@@ -95,12 +91,12 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isEnabled ? onPressed : null,
         style: buttonStyle,
-        child: _buildButtonContent(buttonTextColor, disabledTextColor),
+        child: _buildButtonContent(buttonTextColor, disabledTextColor, theme),
       ),
     );
   }
 
-  Widget _buildButtonContent(Color textColor, Color disabledTextColor) {
+  Widget _buildButtonContent(Color textColor, Color disabledTextColor, ThemeData theme) {
     final color = isEnabled ? textColor : disabledTextColor;
 
     return Row(
@@ -116,7 +112,9 @@ class CustomButton extends StatelessWidget {
         ],
         Text(
           text,
-          style: TextStyle(
+          style: theme.textTheme.labelLarge?.copyWith(
+            color: color,
+          ) ?? TextStyle(
             color: color,
             fontSize: 16.0,
             fontWeight: FontWeight.w600,

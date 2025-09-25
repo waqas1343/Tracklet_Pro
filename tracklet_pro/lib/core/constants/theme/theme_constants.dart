@@ -36,15 +36,15 @@ class AppTheme {
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: Colors.redAccent, width: 1.5),
+        borderSide: const BorderSide(color: AppColors.errorColor, width: 1.5),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: Colors.redAccent, width: 2.0),
+        borderSide: const BorderSide(color: AppColors.errorColor, width: 2.0),
       ),
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: AppColors.softBlue),
+        borderSide: const BorderSide(color: AppColors.disabledColor),
       ),
       hintStyle: const TextStyle(
         color: AppColors.darkGrey,
@@ -165,11 +165,11 @@ class AppTheme {
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: Colors.redAccent),
+        borderSide: const BorderSide(color: AppColors.errorColor),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(color: Colors.redAccent, width: 2),
+        borderSide: const BorderSide(color: AppColors.errorColor, width: 2),
       ),
       hintStyle: const TextStyle(color: AppColors.white),
       labelStyle: const TextStyle(color: AppColors.white),

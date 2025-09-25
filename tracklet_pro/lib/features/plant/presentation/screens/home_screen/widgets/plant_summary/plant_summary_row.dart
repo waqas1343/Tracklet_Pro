@@ -11,7 +11,6 @@ class PlantSummaryRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<PlantSummaryProvider>(context, listen: true);
-
     return Row(
       children: [
         Expanded(

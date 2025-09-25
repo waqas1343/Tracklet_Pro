@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
 import 'package:tracklet_pro/core/constants/dimensions/app_dimensions.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/home_screen/widgets/plant_summary/plant_summary_row.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/home_screen/widgets/order_cards/new_order_card.dart';
@@ -44,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                 driverName: "Romail Ahmed",
                 items: ["50 KG (3)", "15 KG (5)"],
                 status: "Completed",
-                statusColor: Colors.green,
+                statusColor: AppColors.successColor,
               ),
               const SizedBox(height: 12),
               const PreviousOrderCard(
@@ -52,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                 driverName: "Romail Ahmed",
                 items: ["50 KG (3)", "15 KG (5)"],
                 status: "Cancelled",
-                statusColor: Colors.red,
+                statusColor: AppColors.errorColor,
               ),
               const SizedBox(
                 height: 24,

@@ -1,40 +1,77 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tracklet_pro/core/utils/snackbar_util/custom_flushbar.dart';
+import 'package:tracklet_pro/core/utils/validators/validators.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/provider/employe_provider.dart';
 import 'package:tracklet_pro/shared/widgets/custom_button.dart';
 
-class AddEmployeeScreen extends StatefulWidget {
+class AddEmployeeScreen extends StatelessWidget {
   const AddEmployeeScreen({super.key});
 
-  @override
-  State<AddEmployeeScreen> createState() => _AddEmployeeScreenState();
-}
+  void _submit(BuildContext context) {
+    final nameController = TextEditingController();
+    final designationController = TextEditingController();
 
-class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _designationController = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: const Text('Add Employee'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ValidationBuilder.nameTextField(
+                controller: nameController,
+                hintText: 'Enter employee name',
+              ),
+              const SizedBox(height: 16),
+              ValidationBuilder.requiredTextField(
+                controller: designationController,
+                hintText: 'Enter designation (e.g., Supervisor)',
+                validator: Validators.validateDesignation,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                final name = nameController.text.trim();
+                final designation = designationController.text.trim();
 
-  @override
-  void dispose() {
-    _nameController.dispose();
-    _designationController.dispose();
-    super.dispose();
-  }
+                if (name.isNotEmpty && designation.isNotEmpty) {
+                  Provider.of<EmployeeProvider>(
+                    context,
+                    listen: false,
+                  ).addEmployee(name, designation);
 
-  void _submit() {
-    if (!_formKey.currentState!.validate()) return;
-    final name = _nameController.text.trim();
-    final designation = _designationController.text.trim();
-    Provider.of<EmployeeProvider>(
-      context,
-      listen: false,
-    ).addEmployee(name, designation);
-    _nameController.clear();
-    _designationController.clear();
-
-    CustomFlushbar.showSuccess(context, message: 'Employee added successfully');
+                  Navigator.pop(dialogContext);
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    if (context.mounted) {
+                      CustomFlushbar.showSuccess(context, message: 'Employee added successfully');
+                    }
+                  });
+                } else {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    if (context.mounted) {
+                      CustomFlushbar.showError(context, message: 'Please fill all required fields');
+                    }
+                  });
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).primaryColor,
+                foregroundColor: Theme.of(context).colorScheme.onPrimary,
+              ),
+              child: const Text('Add'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -46,69 +83,24 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Employee Name',
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(height: 8),
-                  TextFormField(
-                    controller: _nameController,
-                    decoration: const InputDecoration(
-                      hintText: 'Enter employee name',
-                      border: OutlineInputBorder(),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return 'Please enter a name';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 12),
-                  const Text(
-                    'Designation',
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(height: 8),
-                  TextFormField(
-                    controller: _designationController,
-                    decoration: const InputDecoration(
-                      hintText: 'Enter designation (e.g., Supervisor)',
-                      border: OutlineInputBorder(),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return 'Please enter a designation';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  CustomButton(text: 'Add Employee', onPressed: _submit),
-                ],
-              ),
-            ),
             const SizedBox(height: 24),
-            const Text(
+            Text(
               'Employees',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              color: Colors.grey.shade200,
-              child: const Row(
+              color: Theme.of(context).colorScheme.surfaceContainerHighest,
+              child: Row(
                 children: [
                   Expanded(
                     flex: 2,
                     child: Text(
                       'ID',
-                      style: TextStyle(fontWeight: FontWeight.w600),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ) ?? const TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ),
                   SizedBox(width: 8),
@@ -116,7 +108,9 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                     flex: 3,
                     child: Text(
                       'Name',
-                      style: TextStyle(fontWeight: FontWeight.w600),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ) ?? const TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ),
                   SizedBox(width: 8),
@@ -124,7 +118,9 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                     flex: 3,
                     child: Text(
                       'Designation',
-                      style: TextStyle(fontWeight: FontWeight.w600),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ) ?? const TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ),
                   SizedBox(width: 8),
@@ -134,12 +130,15 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
             ),
             const SizedBox(height: 8),
             Expanded(
-              child: Consumer<EmployeeProvider>(
-                builder: (context, provider, _) {
+              child: Builder(
+                builder: (context) {
+                  final provider = Provider.of<EmployeeProvider>(context);
                   final list = provider.employees;
+
                   if (list.isEmpty) {
                     return const Center(child: Text('No employees yet.'));
                   }
+
                   return ListView.separated(
                     itemCount: list.length,
                     separatorBuilder: (_, __) => const Divider(height: 1),
@@ -164,9 +163,9 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                             const SizedBox(width: 8),
                             IconButton(
                               tooltip: 'Rename',
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.edit_outlined,
-                                color: Colors.blueGrey,
+                                color: Theme.of(context).colorScheme.primary,
                               ),
                               onPressed: () async {
                                 final controller = TextEditingController(
@@ -177,11 +176,9 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                                   builder: (ctx) {
                                     return AlertDialog(
                                       title: const Text('Rename Employee'),
-                                      content: TextField(
+                                      content: ValidationBuilder.nameTextField(
                                         controller: controller,
-                                        decoration: const InputDecoration(
-                                          hintText: 'Enter new name',
-                                        ),
+                                        hintText: 'Enter new name',
                                       ),
                                       actions: [
                                         TextButton(
@@ -204,17 +201,22 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                                 if (newName != null &&
                                     newName.trim().isNotEmpty) {
                                   provider.renameEmployee(e.id, newName.trim());
-                                  CustomFlushbar.showSuccess(
-                                    context,
-                                    message: 'Employee ${e.id} renamed',
-                                  );
+                                  // Use a new context for the flushbar
+                                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                                    if (context.mounted) {
+                                      CustomFlushbar.showSuccess(
+                                        context,
+                                        message: 'Employee ${e.id} renamed',
+                                      );
+                                    }
+                                  });
                                 }
                               },
                             ),
                             IconButton(
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.delete_outline,
-                                color: Colors.redAccent,
+                                color: Theme.of(context).colorScheme.error,
                               ),
                               onPressed: () async {
                                 final confirm = await showDialog<bool>(
@@ -240,10 +242,15 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                                 );
                                 if (confirm == true) {
                                   provider.deleteEmployee(e.id);
-                                  CustomFlushbar.showError(
-                                    context,
-                                    message: 'Employee ${e.id} deleted',
-                                  );
+                                  // Use a new context for the flushbar
+                                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                                    if (context.mounted) {
+                                      CustomFlushbar.showError(
+                                        context,
+                                        message: 'Employee ${e.id} deleted',
+                                      );
+                                    }
+                                  });
                                 }
                               },
                             ),
@@ -253,6 +260,15 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                     },
                   );
                 },
+              ),
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              height: 48,
+              child: CustomButton(
+                text: 'Add Employee',
+                onPressed: () => _submit(context),
               ),
             ),
           ],
