@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tracklet_pro/core/utils/snackbar_util/custom_flushbar.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/provider/employe_provider.dart';
 import 'package:tracklet_pro/shared/widgets/custom_button.dart';
-import 'package:tracklet_pro/constant/utils/snakbar_util/custom_flushbar.dart';
 
 class AddEmployeeScreen extends StatefulWidget {
   const AddEmployeeScreen({super.key});
@@ -204,7 +204,10 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                                 if (newName != null &&
                                     newName.trim().isNotEmpty) {
                                   provider.renameEmployee(e.id, newName.trim());
-                                  CustomFlushbar.showSuccess(context, message: 'Employee ${e.id} renamed');
+                                  CustomFlushbar.showSuccess(
+                                    context,
+                                    message: 'Employee ${e.id} renamed',
+                                  );
                                 }
                               },
                             ),
@@ -237,7 +240,10 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                                 );
                                 if (confirm == true) {
                                   provider.deleteEmployee(e.id);
-                                  CustomFlushbar.showError(context, message: 'Employee ${e.id} deleted');
+                                  CustomFlushbar.showError(
+                                    context,
+                                    message: 'Employee ${e.id} deleted',
+                                  );
                                 }
                               },
                             ),

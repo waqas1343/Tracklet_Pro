@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/bottom_navbar/plant_bottom_navbar.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/employe_screen.dart';
 import 'package:tracklet_pro/multi_provider/app_provider.dart';
 import 'core/constants/theme/theme_constants.dart';
 
@@ -23,6 +24,7 @@ class TrackletApp extends StatelessWidget {
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.system,
         home: const PlantBottomNavbar(),
+        routes: {'/employee': (context) => const EmployeeScreen()},
       ),
     );
   }

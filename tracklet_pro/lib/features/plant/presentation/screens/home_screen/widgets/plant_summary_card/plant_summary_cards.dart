@@ -35,10 +35,8 @@ class PlantSummaryCard extends StatelessWidget {
     final provider = Provider.of<PlantSummaryProvider>(context, listen: true);
     final isCardSelected = provider.isCardSelected(cardId);
 
-    // Text color: white when selected, dark blue when not selected
     final Color textColor = isCardSelected ? Colors.white : AppColors.darkBlue;
 
-    // Background color: dark blue when selected, white when not selected
     final Color backgroundColor = isCardSelected
         ? AppColors.darkBlue
         : Colors.white;

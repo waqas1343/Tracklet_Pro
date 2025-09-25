@@ -15,10 +15,7 @@ class CustomFlushbar {
       backgroundColor: Colors.green,
       margin: const EdgeInsets.all(8),
       borderRadius: BorderRadius.circular(8),
-      icon: const Icon(
-        Icons.check_circle,
-        color: Colors.white,
-      ),
+      icon: const Icon(Icons.check_circle, color: Colors.white),
       flushbarPosition: FlushbarPosition.TOP,
     ).show(context);
   }
@@ -35,10 +32,7 @@ class CustomFlushbar {
       backgroundColor: Colors.red,
       margin: const EdgeInsets.all(8),
       borderRadius: BorderRadius.circular(8),
-      icon: const Icon(
-        Icons.error,
-        color: Colors.white,
-      ),
+      icon: const Icon(Icons.error, color: Colors.white),
       flushbarPosition: FlushbarPosition.TOP,
     ).show(context);
   }
@@ -55,10 +49,7 @@ class CustomFlushbar {
       backgroundColor: Colors.blue,
       margin: const EdgeInsets.all(8),
       borderRadius: BorderRadius.circular(8),
-      icon: const Icon(
-        Icons.info,
-        color: Colors.white,
-      ),
+      icon: const Icon(Icons.info, color: Colors.white),
       flushbarPosition: FlushbarPosition.TOP,
     ).show(context);
   }

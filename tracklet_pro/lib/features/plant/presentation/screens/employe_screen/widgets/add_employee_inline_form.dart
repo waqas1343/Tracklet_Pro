@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tracklet_pro/core/utils/snackbar_util/custom_flushbar.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/provider/employe_provider.dart';
 import 'package:tracklet_pro/shared/widgets/custom_button.dart';
-import 'package:tracklet_pro/constant/utils/snakbar_util/custom_flushbar.dart';
 
 class AddEmployeeInlineForm extends StatefulWidget {
   const AddEmployeeInlineForm({super.key});
@@ -65,7 +65,8 @@ class _AddEmployeeInlineFormState extends State<AddEmployeeInlineForm> {
                 border: OutlineInputBorder(),
               ),
               validator: (v) {
-                if (v == null || v.trim().isEmpty) return 'Designation is required';
+                if (v == null || v.trim().isEmpty)
+                  return 'Designation is required';
                 return null;
               },
             ),
@@ -73,10 +74,7 @@ class _AddEmployeeInlineFormState extends State<AddEmployeeInlineForm> {
           const SizedBox(width: 12),
           SizedBox(
             width: 160,
-            child: CustomButton(
-              text: 'Add Employee',
-              onPressed: _submit,
-            ),
+            child: CustomButton(text: 'Add Employee', onPressed: _submit),
           ),
         ],
       ),
