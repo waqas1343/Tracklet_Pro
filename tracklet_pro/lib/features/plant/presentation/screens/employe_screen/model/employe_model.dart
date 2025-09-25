@@ -2,7 +2,7 @@ class EmployeeModel {
   final String id;
   final String name;
   final String designation;
-  bool isPresent;
+  bool? isPresent;
   String status;
   DateTime? lateTime;
 
@@ -10,10 +10,10 @@ class EmployeeModel {
     required this.id,
     required this.name,
     required this.designation,
-    this.isPresent = false,
+    this.isPresent,
     String? status,
     this.lateTime,
-  }) : status = status ?? (isPresent ? 'present' : 'absent');
+  }) : status = status ?? (isPresent == true ? 'present' : isPresent == false ? 'absent' : 'unmarked');
   void setPresent() {
     isPresent = true;
     status = 'present';
@@ -25,6 +25,8 @@ class EmployeeModel {
     status = 'absent';
     lateTime = null;
   }
+  
+  bool get isAttendanceMarked => isPresent != null;
 
   void setLate(DateTime time) {
     isPresent = false;

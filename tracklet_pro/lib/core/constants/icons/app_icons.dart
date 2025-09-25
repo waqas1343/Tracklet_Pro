@@ -1,5 +1,5 @@
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../assets/app_assets.dart';
 
 class AppIcons {
@@ -19,10 +19,18 @@ class AppIcons {
       icon,
       width: size,
       height: size,
-      colorFilter: color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null,
+      colorFilter: color != null
+          ? ColorFilter.mode(color, BlendMode.srcIn)
+          : null,
     );
   }
-  static Widget btn(String icon, VoidCallback onTap, {double size = 24, Color? color}) {
+
+  static Widget btn(
+    String icon,
+    VoidCallback onTap, {
+    double size = 24,
+    Color? color,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: show(icon, size: size, color: color),

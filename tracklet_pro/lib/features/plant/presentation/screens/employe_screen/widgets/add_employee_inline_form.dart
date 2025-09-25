@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/provider/employe_provider.dart';
 import 'package:tracklet_pro/shared/widgets/custom_button.dart';
+import 'package:tracklet_pro/constant/utils/snakbar_util/custom_flushbar.dart';
 
 class AddEmployeeInlineForm extends StatefulWidget {
   const AddEmployeeInlineForm({super.key});
@@ -31,9 +32,7 @@ class _AddEmployeeInlineFormState extends State<AddEmployeeInlineForm> {
     provider.setSelectedTab(AttendanceTab.total);
     _nameController.clear();
     _designationController.clear();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Employee "$name" added')),
-    );
+    CustomFlushbar.showSuccess(context, message: 'Employee "$name" added');
   }
 
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
 import 'package:tracklet_pro/core/constants/assets/app_icons.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/provider/employe_provider.dart';
 
@@ -23,6 +23,7 @@ class AttendanceTabs extends StatelessWidget {
       required String iconPath,
       required String headerTop,
       required String headerBottom,
+      required Color color,
     }) {
       return Expanded(
         child: GestureDetector(
@@ -32,44 +33,37 @@ class AttendanceTabs extends StatelessWidget {
             duration: const Duration(milliseconds: 150),
             padding: const EdgeInsets.symmetric(vertical: 12),
             decoration: BoxDecoration(
-              color: selected ? AppColors.darkBlue : Colors.grey.shade200,
+              color: selected ? AppColors.mediumBlue : Colors.grey.shade200,
               borderRadius: BorderRadius.circular(10),
             ),
             alignment: Alignment.center,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                headerTop,
-                                style: TextStyle(
-                                  color: selected
-                                      ? Colors.white70
-                                      : Colors.black54,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12,
-                                ),
-                              ),
-
-                              Text(
-                                headerBottom,
-                                style: TextStyle(
-                                  color: selected
-                                      ? Colors.white
-                                      : Colors.black87,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 10,
-                                ),
-                              ),
-                            ],
+                          Text(
+                            headerTop,
+                            style: TextStyle(
+                              color: selected ? Colors.white70 : Colors.black54,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            headerBottom,
+                            style: TextStyle(
+                              color: selected ? Colors.white : Colors.black87,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 10,
+                            ),
                           ),
                         ],
                       ),
@@ -77,28 +71,35 @@ class AttendanceTabs extends StatelessWidget {
                         width: 30,
                         height: 30,
                         decoration: BoxDecoration(
-                          color: AppColors.softBlue.withOpacity(0.1),
+                          color: selected
+                              ? Colors.white24
+                              : color.withOpacity(0.2),
                           shape: BoxShape.circle,
                         ),
                         alignment: Alignment.center,
                         child: SvgPicture.asset(
                           iconPath,
-                          width: 14,
-                          height: 14,
-                          colorFilter: ColorFilter.mode(
-                            selected ? Colors.white : Colors.black87,
-                            BlendMode.srcIn,
-                          ),
+                          width: 20,
+                          height: 20,
+                          color: selected ? Colors.white : color,
+
+                          placeholderBuilder: (context) =>
+                              const CircularProgressIndicator(strokeWidth: 1.5),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    label,
-                    style: TextStyle(
-                      color: selected ? Colors.white : Colors.black87,
-                      fontWeight: FontWeight.w600,
+
+                  const Spacer(),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      label,
+                      style: TextStyle(
+                        color: selected ? Colors.white : Colors.black87,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ],
@@ -116,24 +117,27 @@ class AttendanceTabs extends StatelessWidget {
           selected: provider.selectedTab == AttendanceTab.total,
           onTap: () => provider.setSelectedTab(AttendanceTab.total),
           iconPath: AppIcons.totalEmployees,
+          color: AppColors.mediumBlue,
           headerTop: 'Total',
           headerBottom: 'Employees',
         ),
-        const SizedBox(width: 10),
+        const SizedBox(width: 8),
         buildTab(
           label: '$present',
           selected: provider.selectedTab == AttendanceTab.present,
           onTap: () => provider.setSelectedTab(AttendanceTab.present),
           iconPath: AppIcons.present,
+          color: AppColors.mediumBlue,
           headerTop: 'Present',
           headerBottom: 'Employees',
         ),
-        const SizedBox(width: 10),
+        const SizedBox(width: 8),
         buildTab(
-          label: late > 0 ? '$absent, Late $late' : '$absent',
+          label: late > 0 ? '$absent, $late' : '$absent',
           selected: provider.selectedTab == AttendanceTab.absent,
           onTap: () => provider.setSelectedTab(AttendanceTab.absent),
           iconPath: AppIcons.absent,
+          color: Colors.red,
           headerTop: 'Absent',
           headerBottom: 'Employees',
         ),

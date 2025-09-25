@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
 import 'package:tracklet_pro/features/plant/domain/providers/bottom_nav_provider.dart';

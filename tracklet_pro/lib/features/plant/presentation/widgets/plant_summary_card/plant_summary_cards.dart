@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
 import 'package:tracklet_pro/core/constants/dimensions/app_dimensions.dart';
@@ -8,7 +9,7 @@ class PlantSummaryCard extends StatelessWidget {
   final String titleLine1;
   final String titleLine2;
   final String value;
-  final IconData icon;
+  final String iconPath;
   final Color bgColor;
   final Color? textColor;
   final VoidCallback? onInfoTap;
@@ -19,7 +20,7 @@ class PlantSummaryCard extends StatelessWidget {
     required this.titleLine1,
     required this.titleLine2,
     required this.value,
-    required this.icon,
+    required this.iconPath,
     required this.cardId,
     this.bgColor = const Color(0xFF0A3161),
     this.textColor,
@@ -100,12 +101,14 @@ class PlantSummaryCard extends StatelessWidget {
                             : Colors.grey[200]!,
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(
-                        icon,
-                        size: AppDimensions.iconSmall,
-                        color: isCardSelected
-                            ? Colors.white
-                            : AppColors.darkBlue,
+                      child: SvgPicture.asset(
+                        iconPath,
+                        width: AppDimensions.iconSmall,
+                        height: AppDimensions.iconSmall,
+                        colorFilter: ColorFilter.mode(
+                          isCardSelected ? Colors.white : AppColors.darkBlue,
+                          BlendMode.srcIn,
+                        ),
                       ),
                     ),
                   ],

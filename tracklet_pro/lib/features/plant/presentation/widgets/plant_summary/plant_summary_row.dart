@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tracklet_pro/core/constants/assets/app_icons.dart';
 import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
 import 'package:tracklet_pro/features/plant/presentation/providers/plant_summary_provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/widgets/plant_summary_card/plant_summary_cards.dart';
@@ -25,7 +26,7 @@ class PlantSummaryRow extends StatelessWidget {
                     titleLine1: "Total",
                     titleLine2: "Gas Available",
                     value: "12.5 Tons",
-                    icon: Icons.gas_meter_outlined,
+                    iconPath: AppIcons.totalEmployees,
                     bgColor: const Color(0xFF0A3161),
                     isSelected: provider.isCardSelected('gas_available'),
                   ),
@@ -37,7 +38,7 @@ class PlantSummaryRow extends StatelessWidget {
                     titleLine1: "Active",
                     titleLine2: "Employees",
                     value: "20",
-                    icon: Icons.people_outline,
+                    iconPath: AppIcons.totalEmployees,
                     bgColor: AppColors.white,
                     isSelected: provider.isCardSelected('active_employees'),
                   ),
@@ -49,7 +50,7 @@ class PlantSummaryRow extends StatelessWidget {
                     titleLine1: "Orders",
                     titleLine2: "in Progress",
                     value: "07",
-                    icon: Icons.inventory_2_outlined,
+                    iconPath: AppIcons.totalEmployees,
                     bgColor: const Color(0xFFF0F4F8),
                     isSelected: provider.isCardSelected('orders_in_progress'),
                   ),

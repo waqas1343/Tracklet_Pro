@@ -10,9 +10,9 @@ class EmployeeProvider with ChangeNotifier {
 
   int get totalEmployees => _employees.length;
 
-  int get presentCount => _employees.where((e) => e.isPresent).length;
+  int get presentCount => _employees.where((e) => e.isPresent == true).length;
 
-  int get absentCount => _employees.where((e) => !e.isPresent).length;
+  int get absentCount => _employees.where((e) => e.isPresent == false).length;
   int get lateCount => _employees.where((e) => e.status == 'late').length;
 
   // Search query state for filtering by ID or Name
@@ -43,10 +43,10 @@ class EmployeeProvider with ChangeNotifier {
         base = _employees;
         break;
       case AttendanceTab.present:
-        base = _employees.where((e) => e.isPresent);
+        base = _employees.where((e) => e.isPresent == true);
         break;
       case AttendanceTab.absent:
-        base = _employees.where((e) => !e.isPresent);
+        base = _employees.where((e) => e.isPresent == false);
         break;
     }
     if (_searchQuery.isEmpty) return base.toList();
@@ -101,8 +101,12 @@ class EmployeeProvider with ChangeNotifier {
     final nextNum = maxNum + 1;
     final nextId = 'EMP-${nextNum.toString().padLeft(3, '0')}';
 
-    final newEmp = EmployeeModel(id: nextId, name: name, designation: designation, isPresent: false);
-    newEmp.setAbsent();
+    final newEmp = EmployeeModel(
+      id: nextId, 
+      name: name, 
+      designation: designation,
+      // No default attendance - will be null by default
+    );
     _employees.add(newEmp);
     notifyListeners();
   }

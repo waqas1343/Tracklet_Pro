@@ -41,8 +41,11 @@ dependencies:
   # HTTP Client
   dio: ^5.4.1
   
-  # SVG support
-  flutter_svg: ^2.2.1
+  # Flushbar for notifications
+  another_flushbar: ^1.12.30
+  
+  # SVG Support
+  flutter_svg: ^2.0.10
 
 dev_dependencies:
   flutter_test:

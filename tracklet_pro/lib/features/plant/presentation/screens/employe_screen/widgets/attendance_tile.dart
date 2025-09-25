@@ -47,7 +47,7 @@ class AttendanceTile extends StatelessWidget {
                         children: [
                           ChoiceChip(
                             label: const Text("Absent"),
-                            selected: !employee.isPresent,
+                            selected: employee.isPresent == false,
                             showCheckmark: false,
                             onSelected: (_) {
                               Provider.of<EmployeeProvider>(
@@ -56,11 +56,14 @@ class AttendanceTile extends StatelessWidget {
                               ).toggleAttendance(employee.id, false);
                             },
                             selectedColor: Colors.red,
+                            backgroundColor: employee.isPresent == null
+                                ? Colors.grey[200]
+                                : null,
                           ),
                           const SizedBox(width: 8),
                           ChoiceChip(
                             label: const Text("Present"),
-                            selected: employee.isPresent,
+                            selected: employee.isPresent == true,
                             showCheckmark: false,
                             onSelected: (_) {
                               Provider.of<EmployeeProvider>(
@@ -69,6 +72,9 @@ class AttendanceTile extends StatelessWidget {
                               ).toggleAttendance(employee.id, true);
                             },
                             selectedColor: Colors.green,
+                            backgroundColor: employee.isPresent == null
+                                ? Colors.grey[200]
+                                : null,
                           ),
                         ],
                       )
@@ -123,13 +129,19 @@ class AttendanceTile extends StatelessWidget {
                                 vertical: 6,
                               ),
                               decoration: BoxDecoration(
-                                color: employee.isPresent
+                                color: employee.isPresent == true
                                     ? Colors.green
-                                    : Colors.red,
+                                    : employee.isPresent == false
+                                    ? Colors.red
+                                    : Colors.grey,
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Text(
-                                employee.isPresent ? 'Present' : 'Absent',
+                                employee.isPresent == true
+                                    ? 'Present'
+                                    : employee.isPresent == false
+                                    ? 'Absent'
+                                    : 'Not Marked',
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600,

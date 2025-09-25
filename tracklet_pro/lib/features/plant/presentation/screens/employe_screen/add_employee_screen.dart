@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/provider/employe_provider.dart';
 import 'package:tracklet_pro/shared/widgets/custom_button.dart';
+import 'package:tracklet_pro/constant/utils/snakbar_util/custom_flushbar.dart';
 
 class AddEmployeeScreen extends StatefulWidget {
   const AddEmployeeScreen({super.key});
@@ -33,9 +34,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
     _nameController.clear();
     _designationController.clear();
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Employee added successfully')),
-    );
+    CustomFlushbar.showSuccess(context, message: 'Employee added successfully');
   }
 
   @override
@@ -205,11 +204,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                                 if (newName != null &&
                                     newName.trim().isNotEmpty) {
                                   provider.renameEmployee(e.id, newName.trim());
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text('Employee ${e.id} renamed'),
-                                    ),
-                                  );
+                                  CustomFlushbar.showSuccess(context, message: 'Employee ${e.id} renamed');
                                 }
                               },
                             ),
@@ -242,11 +237,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                                 );
                                 if (confirm == true) {
                                   provider.deleteEmployee(e.id);
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text('Employee ${e.id} deleted'),
-                                    ),
-                                  );
+                                  CustomFlushbar.showError(context, message: 'Employee ${e.id} deleted');
                                 }
                               },
                             ),
