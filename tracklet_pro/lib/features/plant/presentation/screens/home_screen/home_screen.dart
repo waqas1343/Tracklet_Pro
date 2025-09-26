@@ -33,7 +33,9 @@ class HomeScreen extends StatelessWidget {
                 traderTitle:
                     "Arham Traders placed a request for\nmentioned cylinders",
                 driverName: "Romail Ahmed",
+                specialInstructor: "John Doe", // Added special instructor
                 items: ["50 KG (3)", "15 KG (5)"],
+                totalKg: "150 KG",
               ),
               const SizedBox(height: AppDimensions.paddingDefault * 1.5),
 

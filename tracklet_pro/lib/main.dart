@@ -7,21 +7,18 @@ import 'package:tracklet_pro/multi_provider/app_provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  // Set preferred orientations
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  // Set up error handling
   FlutterError.onError = (details) {
     FlutterError.presentError(details);
     debugPrint('Flutter Error: ${details.exception}');
     debugPrint(details.stack?.toString() ?? 'No stack trace');
   };
 
-  // Run the app
   runApp(const TrackletApp());
 }
 
@@ -38,7 +35,7 @@ class TrackletApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.system,
-        initialRoute: '/',  // Update this with your actual initial route
+        initialRoute: '/',
         onGenerateRoute: AppRouter.generateRoute,
         builder: (context, child) {
           return child!;
