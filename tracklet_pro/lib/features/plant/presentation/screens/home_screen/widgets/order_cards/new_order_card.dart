@@ -87,8 +87,6 @@ class NewOrderCard extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-
-              // Driver Info
               Text(
                 'Driver: $driverName',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -96,8 +94,6 @@ class NewOrderCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-
-              // Requested Items Heading
               Text(
                 'Requested Items:',
                 style: Theme.of(
@@ -105,12 +101,8 @@ class NewOrderCard extends StatelessWidget {
                 ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: 8),
-
-              // Items Chips
               if (items.isNotEmpty) _buildItemsList(),
               const SizedBox(height: 16),
-
-              // Action Buttons
               _buildActionButtons(),
             ],
           ),
@@ -118,6 +110,7 @@ class NewOrderCard extends StatelessWidget {
       ),
     );
   }
+
   Widget _buildItemsList() {
     return Wrap(
       spacing: 8,
@@ -148,27 +141,27 @@ class NewOrderCard extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
+        if (onCancel != null) ...[
+          CustomButton(
+            width: 120,
+            height: 36,
+            borderRadius: 20,
+            text: 'Cancel',
+            backgroundColor: Colors.red.shade600,
+            textColor: Colors.white,
+            onPressed: onCancel,
+            isEnabled: true,
+          ),
+          const SizedBox(width: 12),
+        ],
         CustomButton(
-          borderRadius: 50,
-          width: 140,
-          height: 40,
-          text: "Cancel",
-          onPressed: onCancel ?? () {},
-          backgroundColor: AppColors.darkBlue,
+          width: 120,
+          height: 36,
+          borderRadius: 20,
+          text: 'Approve',
+          backgroundColor: Colors.green.shade600,
           textColor: Colors.white,
-          isEnabled: onCancel != null,
-        ),
-        const SizedBox(width: 12),
-        CustomButton(
-          borderRadius: 50,
-
-          width: 140,
-          height: 40,
-          text: "Approve",
-          backgroundColor: AppColors.darkBlue,
-
-          onPressed: onApprove ?? () {},
-          textColor: Colors.white,
+          onPressed: onApprove,
           isEnabled: onApprove != null,
         ),
       ],
