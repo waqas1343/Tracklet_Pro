@@ -9,6 +9,7 @@ import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/
 import 'package:tracklet_pro/features/plant/presentation/screens/rates_screen/provider/rate_provider/rate_provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/orders_screen/provider/orders_provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/stock_screen/provider/stock_provider.dart';
+import 'package:tracklet_pro/features/rates/presentation/provider/order_provider.dart';
 
 // A simple default provider class
 class AppProvider extends ChangeNotifier {
@@ -52,5 +53,8 @@ class AppProviders {
 
     // Stock Provider
     ChangeNotifierProvider<StockProvider>(create: (_) => StockProvider()),
+    ChangeNotifierProvider<OrderProvidermain>(
+      create: (_) => OrderProvidermain(),
+    ),
   ];
 }

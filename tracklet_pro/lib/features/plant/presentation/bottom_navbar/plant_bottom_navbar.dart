@@ -3,16 +3,16 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
 import 'package:tracklet_pro/features/plant/presentation/bottom_navbar/provider/bottom_nav_provider.dart';
+import 'package:tracklet_pro/features/rates/presentation/screens/order_history_screen.dart';
 import '../screens/home_screen/home_screen.dart';
 import '../screens/rates_screen/rates_screen.dart';
-import '../screens/orders_screen/orders_screen.dart';
 import '../screens/stock_screen/stock_screen.dart';
 
 // Pre-cache SVG icons
 final List<Widget> _screens = const [
   HomeScreen(),
   RatesScreen(),
-  OrdersScreen(),
+  OrderHistoryScreen(),
   StockScreen(),
 ];
 
@@ -31,10 +31,13 @@ class PlantBottomNavbar extends StatelessWidget {
     return Consumer<BottomNavProvider>(
       builder: (context, navProvider, _) {
         final currentIndex = navProvider.currentIndex;
-        
+
         return Scaffold(
           body: _screens[currentIndex],
-          bottomNavigationBar: _buildBottomNavBar(currentIndex, navProvider.changeIndex),
+          bottomNavigationBar: _buildBottomNavBar(
+            currentIndex,
+            navProvider.changeIndex,
+          ),
         );
       },
     );
@@ -53,22 +56,16 @@ class PlantBottomNavbar extends StatelessWidget {
       items: List.generate(_navItems.length, (index) {
         final item = _navItems[index];
         final isSelected = currentIndex == index;
-        
+
         return BottomNavigationBarItem(
-          icon: _buildNavIcon(
-            iconPath: item.iconPath,
-            isSelected: isSelected,
-          ),
+          icon: _buildNavIcon(iconPath: item.iconPath, isSelected: isSelected),
           label: item.label,
         );
       }),
     );
   }
 
-  Widget _buildNavIcon({
-    required String iconPath,
-    required bool isSelected,
-  }) {
+  Widget _buildNavIcon({required String iconPath, required bool isSelected}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 4.0),
       child: SvgPicture.asset(
