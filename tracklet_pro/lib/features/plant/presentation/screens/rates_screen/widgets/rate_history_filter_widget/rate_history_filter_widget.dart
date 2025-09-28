@@ -11,7 +11,6 @@ class RateHistoryFilterWidget extends StatelessWidget {
 
     return Row(
       children: [
-        // Search field - takes more space
         Expanded(
           flex: 2,
           child: TextField(
@@ -32,7 +31,6 @@ class RateHistoryFilterWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 6),
-        // Month dropdown - smaller
         Expanded(
           flex: 1,
           child: DropdownButtonFormField<String>(
@@ -50,7 +48,7 @@ class RateHistoryFilterWidget extends StatelessWidget {
             ),
             style: const TextStyle(fontSize: 12, color: Colors.black87),
             dropdownColor: Colors.white,
-            initialValue: provider.selectedMonth.isEmpty ? null : provider.selectedMonth,
+            value: provider.selectedMonth.isEmpty ? null : provider.selectedMonth,
             items: ["Sep", "Oct", "Nov", "Dec"]
                 .map(
                   (month) => DropdownMenuItem(
@@ -87,7 +85,7 @@ class RateHistoryFilterWidget extends StatelessWidget {
             ),
             style: const TextStyle(fontSize: 12, color: Colors.black87),
             dropdownColor: Colors.white,
-            initialValue: provider.selectedRate.isEmpty ? null : provider.selectedRate,
+            value: provider.selectedRate.isEmpty ? null : provider.selectedRate,
             items: ["200", "250", "260", "264"]
                 .map(
                   (rate) => DropdownMenuItem(

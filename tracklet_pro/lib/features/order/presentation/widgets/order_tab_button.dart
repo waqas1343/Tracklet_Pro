@@ -17,7 +17,7 @@ class OrderTabButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 48, // Fixed height
+      height: 48,
       child: GestureDetector(
         onTap: onTap,
         child: Container(

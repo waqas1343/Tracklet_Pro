@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tracklet_pro/features/rates/presentation/widgets/orders_tabs.dart';
+import 'package:tracklet_pro/features/order/presentation/widgets/orders_tabs.dart';
 import 'package:tracklet_pro/shared/widgets/custom_app_bar.dart';
 import '../provider/order_provider.dart';
 import '../widgets/order_card.dart';

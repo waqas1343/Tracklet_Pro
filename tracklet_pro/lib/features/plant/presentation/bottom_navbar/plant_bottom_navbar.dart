@@ -3,17 +3,17 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
 import 'package:tracklet_pro/features/plant/presentation/bottom_navbar/provider/bottom_nav_provider.dart';
-import 'package:tracklet_pro/features/rates/presentation/screens/order_history_screen.dart';
+import 'package:tracklet_pro/features/order/presentation/screens/order_history_screen.dart';
 import '../screens/home_screen/home_screen.dart';
 import '../screens/rates_screen/rates_screen.dart';
-import '../screens/stock_screen/stock_screen.dart';
+import '../screens/setting_screen/setting_screen.dart';
 
 // Pre-cache SVG icons
 final List<Widget> _screens = const [
   HomeScreen(),
   RatesScreen(),
   OrderHistoryScreen(),
-  StockScreen(),
+  SettingScreen(),
 ];
 
 class PlantBottomNavbar extends StatelessWidget {

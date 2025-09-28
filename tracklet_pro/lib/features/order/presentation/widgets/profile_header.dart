@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
+import 'package:tracklet_pro/features/order/presentation/widgets/download_report_dialog.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({super.key});
@@ -23,7 +24,19 @@ class ProfileHeader extends StatelessWidget {
             ),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           ),
-          onPressed: () {},
+          onPressed: () async {
+            final result = await showDownloadReportDialog(context);
+            if (result != null) {
+              // TODO: Replace with real export action (PDF/CSV)
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    'Export: ${result.isDaily ? 'Daily' : 'Custom'} - ${result.date.day.toString().padLeft(2, '0')}-${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][result.date.month - 1]}-${(result.date.year % 100).toString().padLeft(2, '0')}',
+                  ),
+                ),
+              );
+            }
+          },
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
