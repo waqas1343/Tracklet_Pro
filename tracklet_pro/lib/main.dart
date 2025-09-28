@@ -19,10 +19,7 @@ void main() {
     debugPrint('Flutter Error: ${details.exception}');
     debugPrint(details.stack?.toString() ?? 'No stack trace');
   };
-
-  // Initialize service locator
   Injector.init();
-
   runApp(const TrackletApp());
 }
 
