@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
 
-class CompletedTabButton extends StatelessWidget {
+class CancelledTabButton extends StatelessWidget {
   final bool isActive;
   final VoidCallback onTap;
 
-  const CompletedTabButton({super.key, required this.isActive, required this.onTap});
+  const CancelledTabButton({super.key, required this.isActive, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final onSurface = scheme.onSurface.withValues(alpha: 0.8);
+    final bg = isActive ? scheme.primary : scheme.surfaceContainer.withValues(alpha: 0.6);
+    final circleBg = isActive ? scheme.onPrimary.withValues(alpha: 0.8) : scheme.surfaceContainer;
+    final textColor = isActive ? scheme.onPrimary : onSurface;
+    final iconColor = isActive ? scheme.primary : onSurface;
     return SizedBox(
       height: 48,
       child: GestureDetector(
@@ -18,28 +23,22 @@ class CompletedTabButton extends StatelessWidget {
           width: 155,
           padding: const EdgeInsets.symmetric(horizontal: 6),
           decoration: BoxDecoration(
-            color: isActive ? const Color(0xff1f3f6a) : Colors.grey.shade200,
+            color: bg,
             borderRadius: BorderRadius.circular(25),
           ),
           alignment: Alignment.center,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Padding(
-                padding: EdgeInsets.all(6.0),
-                child: Text(
-                  'Completed',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+              Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: Text('Cancelled', style: Theme.of(context).textTheme.labelLarge?.copyWith(color: textColor, fontSize: 14, fontWeight: FontWeight.w500) ?? TextStyle(color: textColor, fontSize: 14, fontWeight: FontWeight.w500)),
               ),
               Container(
                 width: 37,
                 height: 37,
                 decoration: BoxDecoration(
-                  color: isActive ? const Color(0xffccd3dd) : Colors.grey.shade300,
+                  color: circleBg,
                   shape: BoxShape.circle,
                 ),
                 child: Center(
@@ -47,10 +46,7 @@ class CompletedTabButton extends StatelessWidget {
                     'assets/icons/gassMeter.svg',
                     width: 20,
                     height: 20,
-                    colorFilter: ColorFilter.mode(
-                      isActive ? AppColors.white : Colors.black87,
-                      BlendMode.srcIn,
-                    ),
+                    colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
                   ),
                 ),
               ),

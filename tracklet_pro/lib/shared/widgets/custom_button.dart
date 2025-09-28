@@ -75,13 +75,10 @@ class CustomButton extends StatelessWidget {
               )
             : BorderSide.none,
       ),
-      textStyle: theme.textTheme.labelLarge?.copyWith(
-        color: isEnabled ? buttonTextColor : disabledTextColor,
-      ) ?? TextStyle(
+      textStyle: theme.textTheme.labelLarge ?? const TextStyle(
         fontSize: 16.0,
         fontWeight: FontWeight.w600,
         letterSpacing: 1.1,
-        color: isEnabled ? buttonTextColor : disabledTextColor,
       ),
     );
 
@@ -112,10 +109,7 @@ class CustomButton extends StatelessWidget {
         ],
         Text(
           text,
-          style: theme.textTheme.labelLarge?.copyWith(
-            color: color,
-          ) ?? TextStyle(
-            color: color,
+          style: theme.textTheme.labelLarge ?? const TextStyle(
             fontSize: 16.0,
             fontWeight: FontWeight.w600,
             letterSpacing: 1.1,

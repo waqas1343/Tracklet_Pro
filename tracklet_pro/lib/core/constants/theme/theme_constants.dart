@@ -85,12 +85,12 @@ class AppTheme {
       displaySmall: TextStyle(
         color: AppColors.black,
         fontSize: 22,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w700,
       ),
       headlineMedium: TextStyle(
         color: AppColors.black,
         fontSize: 18,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w700,
       ),
       titleLarge: TextStyle(
         color: AppColors.black,
@@ -127,6 +127,26 @@ class AppTheme {
       onPrimary: AppColors.white,
       onSecondary: AppColors.black,
       onSurface: AppColors.black,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.darkBlue,
+        foregroundColor: AppColors.white,
+        textStyle: const TextStyle(fontWeight: FontWeight.w600),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        // Do not use Size.fromHeight which sets infinite width in some contexts
+        // Keep height via padding; width is constrained by parent
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: AppColors.black,
+        side: const BorderSide(color: AppColors.softBlue, width: 1.2),
+        textStyle: const TextStyle(fontWeight: FontWeight.w600),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      ),
     ),
   );
 

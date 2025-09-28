@@ -7,8 +7,10 @@ import 'package:tracklet_pro/features/plant/presentation/bottom_navbar/provider/
 import 'package:tracklet_pro/features/plant/presentation/providers/plant_summary_provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/provider/employe_provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/rates_screen/provider/rate_provider/rate_provider.dart';
-import 'package:tracklet_pro/features/plant/presentation/screens/orders_screen/provider/orders_provider.dart';
-import 'package:tracklet_pro/features/order/presentation/provider/order_provider.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/order/presentation/provider/order_provider.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/setting_screen/provider/sales_summary_provider.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/home_screen/provider/home_provider.dart';
+import 'package:tracklet_pro/di/injector.dart';
 
 // A simple default provider class
 class AppProvider extends ChangeNotifier {
@@ -47,12 +49,17 @@ class AppProviders {
     // Rate Provider
     ChangeNotifierProvider<RateProvider>(create: (_) => RateProvider()),
 
+    // Home Provider (inject OrderRepository)
+    ChangeNotifierProvider<HomeProvider>(
+      create: (_) => HomeProvider(repository: Injector.orderRepository),
+    ),
+
     // Orders Provider
     ChangeNotifierProvider<OrdersProvider>(create: (_) => OrdersProvider()),
 
-    // Stock Provider
-    ChangeNotifierProvider<OrderProvidermain>(
-      create: (_) => OrderProvidermain(),
+    // Sales Summary Provider (global to reflect real-time updates)
+    ChangeNotifierProvider<SalesSummaryProvider>(
+      create: (context) => SalesSummaryProvider(context),
     ),
   ];
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
@@ -46,7 +45,6 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
 
     return TextFormField(
       controller: controller,
@@ -60,70 +58,16 @@ class CustomTextField extends StatelessWidget {
       autofocus: autofocus,
       focusNode: focusNode,
       textCapitalization: textCapitalization,
-      style: theme.textTheme.bodyLarge?.copyWith(
-        color: isDark ? AppColors.white : AppColors.black,
-      ),
+      style: theme.textTheme.bodyLarge,
       onChanged: onChanged,
       validator: validator,
       decoration: InputDecoration(
-        filled: true,
-        fillColor: isDark ? AppColors.mediumBlue : AppColors.white,
         hintText: hintText,
-        hintStyle: theme.textTheme.bodyMedium?.copyWith(
-          color: isDark ? AppColors.white : AppColors.darkGrey,
-        ),
         labelText: labelText,
-        labelStyle: theme.textTheme.bodyLarge?.copyWith(
-          color: isDark ? AppColors.white : AppColors.darkGrey,
-        ),
         errorText: errorText,
-        errorStyle: theme.textTheme.bodySmall?.copyWith(
-          color: Colors.redAccent,
-        ),
-        prefixIcon: prefixIcon != null
-            ? IconTheme(
-                data: IconThemeData(
-                  color: isDark ? AppColors.white : AppColors.darkGrey,
-                ),
-                child: prefixIcon!,
-              )
-            : null,
-        suffixIcon: suffixIcon != null
-            ? IconTheme(
-                data: IconThemeData(
-                  color: isDark ? AppColors.white : AppColors.darkGrey,
-                ),
-                child: suffixIcon!,
-              )
-            : null,
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 16,
-          horizontal: 20,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.darkGrey, width: 1.5),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.darkGrey, width: 1.5),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.black, width: 2.0),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.redAccent, width: 1.5),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.redAccent, width: 2.0),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: AppColors.softBlue, width: 1.5),
-        ),
+        // Let InputDecorationTheme control styles, borders, icon colors
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
       ),
     );
   }

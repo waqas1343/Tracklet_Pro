@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tracklet_pro/features/order/presentation/widgets/download_report_dialog.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/order/presentation/widgets/download_report_dialog.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/setting_screen/provider/sales_summary_provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/setting_screen/widgets/orders_overview_card.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/setting_screen/widgets/summary_card.dart';
+import 'package:tracklet_pro/core/constants/dimens.dart';
 
 class SalesSummaryScreen extends StatelessWidget {
   const SalesSummaryScreen({super.key});
@@ -11,7 +12,7 @@ class SalesSummaryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => SalesSummaryProvider(),
+      create: (context) => SalesSummaryProvider(context),
       child: const _SalesSummaryView(),
     );
   }
@@ -23,18 +24,16 @@ class _SalesSummaryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<SalesSummaryProvider>();
-    final primaryDark = const Color(0xff1f3f6a);
 
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black),
+          icon: Icon(Icons.arrow_back_ios_new_rounded, color: Theme.of(context).colorScheme.onSurface),
           onPressed: () => Navigator.of(context).maybePop(),
         ),
-        title: const Text('Sales & Reports', style: TextStyle(color: Colors.black)),
+        title: Text('Sales & Reports', style: Theme.of(context).textTheme.titleLarge),
         centerTitle: false,
       ),
       body: SafeArea(
@@ -43,9 +42,9 @@ class _SalesSummaryView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 8),
-              const Text('Sales Summary', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
-              const SizedBox(height: 12),
+              const SizedBox(height: Dimens.gap8),
+              Text('Sales Summary', style: Theme.of(context).textTheme.displaySmall),
+              const SizedBox(height: Dimens.gap12),
 
               Row(
                 children: [
@@ -78,10 +77,8 @@ class _SalesSummaryView extends StatelessWidget {
                 ],
               ),
 
-              const SizedBox(height: 20),
-              const Text('Orders Overview', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
-              const SizedBox(height: 10),
-
+              const SizedBox(height: Dimens.gap20),
+              Text('Orders Overview', style: Theme.of(context).textTheme.headlineMedium),
               OrdersOverviewCard(
                 title: 'Total Orders',
                 period: provider.period,
@@ -90,7 +87,7 @@ class _SalesSummaryView extends StatelessWidget {
                 onPeriodChanged: provider.setPeriod,
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: Dimens.gap20),
 
               SizedBox(
                 height: 48,
@@ -101,30 +98,29 @@ class _SalesSummaryView extends StatelessWidget {
                     backgroundColor: Colors.black,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
-                  child: const Text('View Detailed Report', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+                  child: const Text('View Detailed Report',
+                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
                 ),
               ),
 
-              const SizedBox(height: 12),
+              const SizedBox(height: Dimens.gap12),
+
               SizedBox(
                 height: 48,
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () async {
                     final result = await showDownloadReportDialog(context);
-                    if (result != null && context.mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Export ${result.isDaily ? 'Daily' : 'Custom'} - ${result.date}')),
-                      );
-                    }
+                    if (result == null || !context.mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Export ${result.isDaily ? 'Daily' : 'Custom'} - ${result.date}')),
+                    );
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryDark,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  ),
-                  child: const Text('Download Report', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+                  child: const Text('Download Report',
+                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
                 ),
               ),
+              const SizedBox(height: Dimens.gap12),
             ],
           ),
         ),

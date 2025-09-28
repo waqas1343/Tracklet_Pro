@@ -17,14 +17,16 @@ class SummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bg = dark ? const Color(0xff1f3f6a) : Colors.white;
-    final fg = dark ? Colors.white : Colors.black87;
+    final scheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+    final bg = dark ? scheme.primary : scheme.surface;
+    final fg = dark ? scheme.onPrimary : scheme.onSurface;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: bg,
         borderRadius: BorderRadius.circular(12),
-        border: dark ? null : Border.all(color: Colors.grey.shade300),
+        border: dark ? null : Border.all(color: Theme.of(context).dividerColor),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,23 +37,16 @@ class SummaryCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: TextStyle(color: fg.withOpacity(0.9), fontWeight: FontWeight.w600)),
+                  Text(title, style: textTheme.titleMedium?.copyWith(color: fg, fontWeight: FontWeight.w600) ?? TextStyle(color: fg, fontWeight: FontWeight.w600)),
                   const SizedBox(height: 2),
-                  Text(subtitle, style: TextStyle(color: fg.withOpacity(0.7), fontSize: 12)),
+                  Text(subtitle, style: textTheme.bodySmall?.copyWith(color: fg.withValues(alpha: 0.7)) ?? TextStyle(color: fg.withValues(alpha: 0.7), fontSize: 12)),
                 ],
               ),
               if (trailing != null) trailing!,
             ],
           ),
           const SizedBox(height: 16),
-          Text(
-            value,
-            style: TextStyle(
-              color: fg,
-              fontWeight: FontWeight.w800,
-              fontSize: 22,
-            ),
-          ),
+          Text(value, style: textTheme.displaySmall?.copyWith(color: fg, fontWeight: FontWeight.w800, fontSize: 22) ?? TextStyle(color: fg, fontWeight: FontWeight.w800, fontSize: 22)),
         ],
       ),
     );

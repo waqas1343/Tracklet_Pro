@@ -4,6 +4,10 @@ class OrderModel {
   final int totalKg;
   final double totalBill;
   final String status;
+  final String? specialInstruction;
+  final String? location;
+  final String? driverName;
+  final DateTime? createdAt;
 
   OrderModel({
     required this.traderName,
@@ -11,5 +15,9 @@ class OrderModel {
     required this.totalKg,
     required this.totalBill,
     required this.status,
+    this.specialInstruction,
+    this.location,
+    this.driverName,
+    this.createdAt,
   });
 }

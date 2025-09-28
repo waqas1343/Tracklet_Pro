@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:tracklet_pro/core/constants/theme/theme_constants.dart';
 import 'package:tracklet_pro/core/routes/app_router.dart';
 import 'package:tracklet_pro/multi_provider/app_provider.dart';
+import 'package:tracklet_pro/di/injector.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +19,9 @@ void main() {
     debugPrint('Flutter Error: ${details.exception}');
     debugPrint(details.stack?.toString() ?? 'No stack trace');
   };
+
+  // Initialize service locator
+  Injector.init();
 
   runApp(const TrackletApp());
 }

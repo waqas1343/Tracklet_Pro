@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tracklet_pro/features/order/presentation/widgets/download_report_dialog.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/order/presentation/widgets/download_report_dialog.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/setting_screen/provider/setting_provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/setting_screen/widgets/settings_header.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/setting_screen/widgets/setting_tile.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/setting_screen/widgets/language_toggle.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/setting_screen/widgets/footer_links_row.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/setting_screen/widgets/logout_button.dart';
+import 'package:tracklet_pro/core/constants/dimens.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
@@ -28,7 +29,6 @@ class _SettingView extends StatelessWidget {
     final provider = context.watch<SettingProvider>();
 
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -42,21 +42,21 @@ class _SettingView extends StatelessWidget {
                 onInboxTap: () {},
                 onNotificationsTap: () {},
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: Dimens.gap16),
 
               // Title
-              const Text('Setting', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700)),
-              const SizedBox(height: 12),
+              Text('Setting', style: Theme.of(context).textTheme.displaySmall),
+              const SizedBox(height: Dimens.gap12),
 
               // Setting tiles
               SettingTile(title: 'Manage Plant', onTap: () => provider.onManagePlant(context)),
-              const SizedBox(height: 10),
+              const SizedBox(height: Dimens.gap10),
               SettingTile(title: 'Sales Summary', onTap: () => provider.onSalesSummary(context)),
-              const SizedBox(height: 10),
+              const SizedBox(height: Dimens.gap10),
               SettingTile(title: 'Profile Settings', onTap: provider.onProfileSettings),
-              const SizedBox(height: 10),
+              const SizedBox(height: Dimens.gap10),
               SettingTile(title: 'Change Password', onTap: provider.onChangePassword),
-              const SizedBox(height: 10),
+              const SizedBox(height: Dimens.gap10),
               SettingTile(
                 title: 'Download Reports',
                 onTap: () async {
@@ -73,9 +73,9 @@ class _SettingView extends StatelessWidget {
                 },
               ),
 
-              const SizedBox(height: 20),
-              const Text('Language', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
-              const SizedBox(height: 8),
+              const SizedBox(height: Dimens.gap20),
+              Text('Language', style: Theme.of(context).textTheme.headlineMedium),
+              const SizedBox(height: Dimens.gap8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -87,13 +87,13 @@ class _SettingView extends StatelessWidget {
                 ],
               ),
 
-              const SizedBox(height: 8),
+              const SizedBox(height: Dimens.gap8),
               FooterLinksRow(
                 onLegal: () => provider.onLegalNotice(context),
                 onPrivacy: () => provider.onPrivacyPolicy(context),
               ),
 
-              const SizedBox(height: 12),
+              const SizedBox(height: Dimens.gap12),
               LogoutButton(onTap: () => provider.logout(context)),
             ],
           ),

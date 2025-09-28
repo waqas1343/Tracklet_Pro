@@ -17,7 +17,8 @@ class OrdersOverviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryDark = const Color(0xff1f3f6a);
+    final scheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     final labels = const ['MON','TUE','WED','THU','FRI','SAT','SUN'];
     final maxY = (data.isEmpty ? 0 : data.reduce((a,b) => a > b ? a : b)).toDouble() + 10;
     final yTicks = const [60, 50, 40, 30];
@@ -25,9 +26,9 @@ class OrdersOverviewCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: scheme.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: Theme.of(context).dividerColor),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +36,7 @@ class OrdersOverviewCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
+              Text(title, style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600) ?? const TextStyle(fontWeight: FontWeight.w600)),
               DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
                   value: period,
@@ -66,7 +67,7 @@ class OrdersOverviewCard extends StatelessWidget {
                               alignment: Alignment.centerRight,
                               child: Text(
                                 v.toString(),
-                                style: const TextStyle(fontSize: 10, color: Colors.black54),
+                                style: textTheme.bodySmall?.copyWith(color: scheme.onSurface.withValues(alpha: 0.6), fontSize: 10) ?? TextStyle(fontSize: 10, color: scheme.onSurface.withValues(alpha: 0.6)),
                               ),
                             ))
                         .toList(),
@@ -88,7 +89,7 @@ class OrdersOverviewCard extends StatelessWidget {
                                 yTicks.length,
                                 (index) => Container(
                                   height: 1,
-                                  color: Colors.grey.shade300,
+                                  color: Theme.of(context).dividerColor,
                                 ),
                               ),
                             ),
@@ -108,12 +109,12 @@ class OrdersOverviewCard extends StatelessWidget {
                                           Container(
                                             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                                             decoration: BoxDecoration(
-                                              color: primaryDark,
+                                              color: scheme.primary,
                                               borderRadius: BorderRadius.circular(6),
                                             ),
                                             child: Text(
                                               data[i].toString(),
-                                              style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w700),
+                                              style: TextStyle(color: scheme.onPrimary, fontSize: 10, fontWeight: FontWeight.w700),
                                             ),
                                           ),
                                         const SizedBox(height: 4),
@@ -122,13 +123,13 @@ class OrdersOverviewCard extends StatelessWidget {
                                             width: 16,
                                             height: maxY == 0 ? 0 : (data[i] / maxY) * 120,
                                             decoration: BoxDecoration(
-                                              color: i == highlightIndex ? primaryDark : primaryDark.withOpacity(0.15),
+                                              color: i == highlightIndex ? scheme.primary : scheme.primary.withValues(alpha: 0.15),
                                               borderRadius: BorderRadius.circular(6),
                                             ),
                                           ),
                                         ),
                                         const SizedBox(height: 8),
-                                        Text(labels[i], style: const TextStyle(fontSize: 10, color: Colors.black54)),
+                                        Text(labels[i], style: textTheme.bodySmall?.copyWith(color: scheme.onSurface.withValues(alpha: 0.6), fontSize: 10) ?? TextStyle(fontSize: 10, color: scheme.onSurface.withValues(alpha: 0.6))),
                                       ],
                                     ),
                                   ),

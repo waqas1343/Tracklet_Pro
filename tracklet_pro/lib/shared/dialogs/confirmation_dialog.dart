@@ -54,9 +54,7 @@ class ConfirmationDialog extends StatelessWidget {
     return AlertDialog(
       title: Text(
         title,
-        style: theme.textTheme.titleLarge?.copyWith(
-          fontWeight: FontWeight.bold,
-        ),
+        style: theme.textTheme.titleLarge,
       ),
       content: Text(message, style: theme.textTheme.bodyMedium),
       actions: [
@@ -70,7 +68,7 @@ class ConfirmationDialog extends StatelessWidget {
         ElevatedButton(
           onPressed: onConfirm,
           style: ElevatedButton.styleFrom(
-            backgroundColor: confirmButtonColor ?? theme.primaryColor,
+            backgroundColor: confirmButtonColor ?? theme.colorScheme.primary,
             foregroundColor: theme.colorScheme.onPrimary,
           ),
           child: Text(confirmText),

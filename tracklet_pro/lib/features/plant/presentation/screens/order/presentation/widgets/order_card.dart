@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tracklet_pro/features/order/data/model/order_model.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/order/data/model/order_model.dart';
 
 class OrderCard extends StatelessWidget {
   final OrderModel order;
@@ -7,12 +7,14 @@ class OrderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: scheme.surface,
         borderRadius: BorderRadius.circular(10),
-     border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: Theme.of(context).dividerColor),
       ),
       child: Padding(
         padding: const EdgeInsets.all(12),
@@ -21,23 +23,23 @@ class OrderCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text(
-                  order.traderName,
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                Spacer(),
+                Text(order.traderName, style: textTheme.titleLarge),
+                const Spacer(),
                 Chip(
-                  backgroundColor: Colors.green,
-                  label: Text(order.status))
+                  label: Text(order.status),
+                  backgroundColor: scheme.primaryContainer,
+                  labelStyle: textTheme.labelSmall,
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  visualDensity: VisualDensity.compact,
+                )
               ],
             ),
             const SizedBox(height: 6),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-
-                Text("Requested item "),
-                  Wrap(
+                Text('Requested item', style: textTheme.bodyMedium),
+                Wrap(
               spacing: 2,
               children: order.requestedItems
                   .map(
@@ -47,12 +49,12 @@ class OrderCard extends StatelessWidget {
                       labelPadding: const EdgeInsets.symmetric(horizontal: 2, vertical: -2),
                       label: Text(
                         e,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 8,
+                        style: TextStyle(
+                          color: scheme.onSecondaryContainer,
+                          fontSize: 10,
                         ),
                       ),
-                      backgroundColor: Colors.black,
+                      backgroundColor: scheme.secondaryContainer,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                         side: BorderSide.none,
@@ -71,16 +73,16 @@ class OrderCard extends StatelessWidget {
                 Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Total Kg:"),
-                Text("Rs. ${order.totalKg}"),
+                Text('Total Kg:', style: textTheme.bodyMedium),
+                Text('Rs. ${order.totalKg}', style: textTheme.titleMedium),
               ],
             ),
           
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Total Bill:"),
-                Text("Rs. ${order.totalBill}"),
+                Text('Total Bill:', style: textTheme.bodyMedium),
+                Text('Rs. ${order.totalBill}', style: textTheme.titleMedium),
               ],
             ),
          

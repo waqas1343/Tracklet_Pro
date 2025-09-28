@@ -45,8 +45,8 @@ class _DownloadReportDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
     final model = context.watch<DownloadReportDialogModel>();
-    final primaryDark = const Color(0xff1f3f6a);
 
     return Dialog(
       insetPadding: const EdgeInsets.symmetric(horizontal: 24),
@@ -54,7 +54,7 @@ class _DownloadReportDialog extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.fromLTRB(20, 18, 20, 16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: scheme.surface,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
@@ -65,10 +65,7 @@ class _DownloadReportDialog extends StatelessWidget {
             Center(
               child: Text(
                 'Download Report',
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black,
-                ),
+                style: theme.textTheme.titleMedium,
               ),
             ),
             const SizedBox(height: 8),
@@ -77,9 +74,7 @@ class _DownloadReportDialog extends StatelessWidget {
               child: Text(
                 'Select Date Range for Orders History',
                 textAlign: TextAlign.center,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: Colors.black87,
-                ),
+                style: theme.textTheme.bodyMedium,
               ),
             ),
             const SizedBox(height: 16),
@@ -91,14 +86,14 @@ class _DownloadReportDialog extends StatelessWidget {
                   text: 'Daily',
                   isActive: model.isDaily,
                   onTap: () => model.toggle(true),
-                  activeColor: primaryDark,
+                  activeColor: scheme.primary,
                 ),
                 const SizedBox(width: 10),
                 _PillToggle(
                   text: 'Custom',
                   isActive: !model.isDaily,
                   onTap: () => model.toggle(false),
-                  activeColor: primaryDark,
+                  activeColor: scheme.primary,
                 ),
               ],
             ),
@@ -107,7 +102,7 @@ class _DownloadReportDialog extends StatelessWidget {
             // Date selector label
             Text(
               'Select Date:',
-              style: theme.textTheme.bodyMedium?.copyWith(color: Colors.black87),
+              style: theme.textTheme.bodyMedium,
             ),
             const SizedBox(height: 8),
 
@@ -127,18 +122,18 @@ class _DownloadReportDialog extends StatelessWidget {
                   readOnly: true,
                   decoration: InputDecoration(
                     hintText: _formatDate(model.selectedDate),
-                    hintStyle: const TextStyle(color: Colors.black54),
+                    hintStyle: theme.textTheme.bodyMedium,
                     filled: true,
-                    fillColor: Colors.grey.shade100,
+                    fillColor: theme.colorScheme.surfaceContainer.withValues(alpha: 0.2),
                     contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                    suffixIcon: const Icon(Icons.arrow_drop_down_rounded, color: Colors.grey),
+                    suffixIcon: Icon(Icons.arrow_drop_down_rounded, color: theme.iconTheme.color),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.grey.shade300),
+                      borderSide: BorderSide(color: theme.dividerColor),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: primaryDark, width: 1.5),
+                      borderSide: BorderSide(color: scheme.primary, width: 1.5),
                     ),
                   ),
                 ),
@@ -153,13 +148,6 @@ class _DownloadReportDialog extends StatelessWidget {
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () => Navigator.of(context).pop(null),
-                    style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
-                      side: BorderSide(color: Colors.grey.shade400),
-                      foregroundColor: Colors.black,
-                      textStyle: const TextStyle(fontWeight: FontWeight.w600),
-                    ),
                     child: const Text('Cancel'),
                   ),
                 ),
@@ -171,13 +159,6 @@ class _DownloadReportDialog extends StatelessWidget {
                         DownloadReportResult(isDaily: model.isDaily, date: model.selectedDate),
                       );
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryDark,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
-                      textStyle: const TextStyle(fontWeight: FontWeight.w600),
-                    ),
                     child: const Text('Export Report'),
                   ),
                 ),

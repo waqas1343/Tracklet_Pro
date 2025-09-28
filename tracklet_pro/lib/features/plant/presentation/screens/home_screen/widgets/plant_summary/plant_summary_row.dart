@@ -4,6 +4,7 @@ import 'package:tracklet_pro/core/constants/assets/app_icons.dart';
 import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
 import 'package:tracklet_pro/features/plant/presentation/providers/plant_summary_provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/widgets/summary_tab/summary_tab.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/home_screen/provider/home_provider.dart';
 
 class PlantSummaryRow extends StatelessWidget {
   const PlantSummaryRow({super.key});
@@ -11,11 +12,13 @@ class PlantSummaryRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<PlantSummaryProvider>(context, listen: true);
+    final homeProvider = Provider.of<HomeProvider>(context, listen: true);
+
     return Row(
       children: [
         Expanded(
           child: SummaryTab(
-            value: '12.5',
+            value: '${(homeProvider.availableStockKg / 1000).toStringAsFixed(1)}',
             label: 'Tons',
             iconPath: AppIcons.totalEmployees,
             color: const Color(0xFF0A3161),

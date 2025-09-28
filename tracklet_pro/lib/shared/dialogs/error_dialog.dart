@@ -54,10 +54,7 @@ class ErrorDialog extends StatelessWidget {
       title: Text(
         title,
         textAlign: TextAlign.center,
-        style: theme.textTheme.titleLarge?.copyWith(
-          color: theme.colorScheme.error,
-          fontWeight: FontWeight.bold,
-        ),
+        style: theme.textTheme.titleLarge,
       ),
       content: Text(
         message,

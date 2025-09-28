@@ -1,4 +1,4 @@
-import 'package:tracklet_pro/features/order/data/model/order_model.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/order/data/model/order_model.dart';
 
 class OrderDummy {
   static List<OrderModel> completedOrders = [
@@ -8,6 +8,7 @@ class OrderDummy {
       totalKg: 225,
       totalBill: 56250,
       status: "Completed",
+      createdAt: DateTime.now().subtract(const Duration(days: 1)),
     ),
     OrderModel(
       traderName: "Arham Traders",
@@ -15,6 +16,7 @@ class OrderDummy {
       totalKg: 225,
       totalBill: 56250,
       status: "Completed",
+      createdAt: DateTime.now().subtract(const Duration(days: 2)),
     ),
   ];
 
