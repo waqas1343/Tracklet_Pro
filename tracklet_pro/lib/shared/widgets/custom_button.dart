@@ -41,14 +41,17 @@ class CustomButton extends StatelessWidget {
     final theme = Theme.of(context);
 
     // Always use provided background color if available, otherwise use theme
-    final buttonBgColor = backgroundColor ??
+    final buttonBgColor =
+        backgroundColor ??
         (isOutlined
             ? Colors.transparent
             : isDark
-                ? theme.colorScheme.onPrimary
-                : theme.primaryColor);
+            ? theme.colorScheme.onPrimary
+            : theme.primaryColor);
 
-    final buttonTextColor = textColor ?? (isDark ? theme.colorScheme.onSurface : theme.colorScheme.onPrimary);
+    final buttonTextColor =
+        textColor ??
+        (isDark ? theme.colorScheme.onSurface : theme.colorScheme.onPrimary);
 
     // For disabled state, use theme disabled colors
     final disabledBgColor = isOutlined
@@ -59,41 +62,59 @@ class CustomButton extends StatelessWidget {
         ? theme.disabledColor
         : theme.colorScheme.onSurface.withValues(alpha: 0.38);
 
-    final buttonStyle = ElevatedButton.styleFrom(
-      backgroundColor: isEnabled ? buttonBgColor : disabledBgColor,
-      foregroundColor: isEnabled ? buttonTextColor : disabledTextColor,
-      elevation: elevation ?? 0,
-      padding: defaultPadding,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(borderRadius ?? defaultBorderRadius),
-        side: isOutlined
-            ? BorderSide(
-                color: isEnabled
-                    ? (textColor ?? buttonTextColor)
-                    : disabledTextColor,
-                width: 1.5,
-              )
-            : BorderSide.none,
-      ),
-      textStyle: theme.textTheme.labelLarge ?? const TextStyle(
-        fontSize: 16.0,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 1.1,
-      ),
-    );
+    final currentBgColor = isEnabled ? buttonBgColor : disabledBgColor;
+    final currentTextColor = isEnabled ? buttonTextColor : disabledTextColor;
 
     return SizedBox(
       width: width ?? double.infinity,
       height: height ?? 48.0,
-      child: ElevatedButton(
-        onPressed: isEnabled ? onPressed : null,
-        style: buttonStyle,
-        child: _buildButtonContent(buttonTextColor, disabledTextColor, theme),
+      child: Container(
+        decoration: BoxDecoration(
+          color: currentBgColor,
+          borderRadius: BorderRadius.circular(
+            borderRadius ?? defaultBorderRadius,
+          ),
+          border: isOutlined
+              ? Border.all(
+                  color: isEnabled
+                      ? (textColor ?? buttonTextColor)
+                      : disabledTextColor,
+                  width: 1.5,
+                )
+              : null,
+          boxShadow: elevation != null && elevation! > 0
+              ? [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.2),
+                    blurRadius: elevation! * 2,
+                    offset: Offset(0, elevation! / 2),
+                  ),
+                ]
+              : null,
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: isEnabled ? onPressed : null,
+            borderRadius: BorderRadius.circular(
+              borderRadius ?? defaultBorderRadius,
+            ),
+            child: _buildButtonContent(
+              currentTextColor,
+              disabledTextColor,
+              theme,
+            ),
+          ),
+        ),
       ),
     );
   }
 
-  Widget _buildButtonContent(Color textColor, Color disabledTextColor, ThemeData theme) {
+  Widget _buildButtonContent(
+    Color textColor,
+    Color disabledTextColor,
+    ThemeData theme,
+  ) {
     final color = isEnabled ? textColor : disabledTextColor;
 
     return Row(
@@ -109,7 +130,8 @@ class CustomButton extends StatelessWidget {
         ],
         Text(
           text,
-          style: theme.textTheme.labelLarge ?? const TextStyle(
+          style: TextStyle(
+            color: color,
             fontSize: 16.0,
             fontWeight: FontWeight.w600,
             letterSpacing: 1.1,

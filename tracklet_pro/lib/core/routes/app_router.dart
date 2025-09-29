@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tracklet_pro/features/plant/presentation/bottom_navbar/plant_bottom_navbar.dart';
+import 'package:tracklet_pro/features/distributor/presentation/distributor_bottom_nav_bar/distributor_bottom_nav_bar.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/employee/employee_screen.dart';
 
 class AppRoutes {
@@ -11,7 +11,7 @@ class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.home:
-        return MaterialPageRoute(builder: (_) => const PlantBottomNavbar());
+        return MaterialPageRoute(builder: (_) => const DistributorBottomNavBar());
       case AppRoutes.employee:
         return MaterialPageRoute(builder: (_) => const EmployeeScreen());
       default:
