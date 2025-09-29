@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/widgets/attendance_list.dart';
-import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/widgets/attendance_tabs.dart';
 import 'package:tracklet_pro/shared/widgets/custom_app_bar.dart';
-import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/add_employee_screen.dart';
-import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/widgets/attendance_search_field.dart';
+import 'attendance_search_field.dart';
+import 'attendance_tabs.dart';
+import 'attendance_list.dart';
+import 'add_employee/add_employee_screen.dart';
 
+// SECTION: Screen - Employees (search + tabs + list)
 class EmployeeScreen extends StatelessWidget {
   const EmployeeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: const CustomAppBar(),
       body: const Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -25,12 +26,10 @@ class EmployeeScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        heroTag: 'employee_fab', // Unique hero tag
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => const AddEmployeeScreen()),
-          );
-        },
+        heroTag: 'employee_fab',
+        onPressed: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const AddEmployeeScreen()),
+        ),
         icon: const Icon(Icons.person_add_alt_1),
         label: const Text('Add Employee'),
       ),

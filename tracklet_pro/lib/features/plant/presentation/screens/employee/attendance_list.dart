@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/provider/employe_provider.dart';
+import 'provider/employee_provider.dart';
 import 'attendance_tile.dart';
 
+// SECTION: UI - Attendance list container and header
 class AttendanceList extends StatelessWidget {
   const AttendanceList({super.key});
 

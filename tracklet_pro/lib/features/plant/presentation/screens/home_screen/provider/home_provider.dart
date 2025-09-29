@@ -3,13 +3,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/order/data/model/order_model.dart';
-import 'package:tracklet_pro/features/plant/presentation/screens/order/data/repositories/order_repository.dart';
+import 'package:tracklet_pro/features/plant/domain/repositories/order_repository.dart';
+import 'package:tracklet_pro/features/plant/domain/repositories/order_repository_impl.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/order/presentation/provider/order_provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/setting_screen/provider/sales_summary_provider.dart';
 
 /// Provider dedicated to Home screen for handling new orders workflow
 class HomeProvider extends ChangeNotifier {
-  HomeProvider({OrderRepository? repository}) : _repository = repository ?? OrderRepository();
+  HomeProvider({OrderRepository? repository}) : _repository = repository ?? OrderRepositoryImpl();
 
   // Start with 12.5 tons => 12,500 KG
   int _availableStockKg = 12500;

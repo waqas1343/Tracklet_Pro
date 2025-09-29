@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tracklet_pro/core/constants/colors/app_colors.dart';
 import 'package:tracklet_pro/core/constants/assets/app_icons.dart';
-import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/provider/employe_provider.dart';
+import 'provider/employee_provider.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
+// SECTION: UI - Attendance tabs (Total / Present / Absent)
 class AttendanceTabs extends StatelessWidget {
   const AttendanceTabs({super.key});
 
@@ -24,6 +25,7 @@ class AttendanceTabs extends StatelessWidget {
       required String headerTop,
       required String headerBottom,
       required Color color,
+      required Color selectedColor,
     }) {
       return Expanded(
         child: GestureDetector(
@@ -33,7 +35,9 @@ class AttendanceTabs extends StatelessWidget {
             duration: const Duration(milliseconds: 150),
             padding: const EdgeInsets.symmetric(vertical: 12),
             decoration: BoxDecoration(
-              color: selected ? AppColors.mediumBlue : Theme.of(context).colorScheme.surfaceContainerHighest,
+              color: selected
+                  ? selectedColor
+                  : Theme.of(context).colorScheme.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(10),
             ),
             alignment: Alignment.center,
@@ -51,7 +55,15 @@ class AttendanceTabs extends StatelessWidget {
                           Text(
                             headerTop,
                             style: TextStyle(
-                              color: selected ? Theme.of(context).colorScheme.onPrimary.withValues(alpha: 0.7) : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+                              color: selected
+                                  ? Theme.of(context)
+                                      .colorScheme
+                                      .onPrimary
+                                      .withValues(alpha: 0.7)
+                                  : Theme.of(context)
+                                      .colorScheme
+                                      .onSurface
+                                      .withValues(alpha: 0.6),
                               fontWeight: FontWeight.w400,
                               fontSize: 12,
                             ),
@@ -60,7 +72,9 @@ class AttendanceTabs extends StatelessWidget {
                           Text(
                             headerBottom,
                             style: TextStyle(
-                              color: selected ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface,
+                              color: selected
+                                  ? Theme.of(context).colorScheme.onPrimary
+                                  : Theme.of(context).colorScheme.onSurface,
                               fontWeight: FontWeight.w600,
                               fontSize: 10,
                             ),
@@ -72,7 +86,10 @@ class AttendanceTabs extends StatelessWidget {
                         height: 30,
                         decoration: BoxDecoration(
                           color: selected
-                              ? Theme.of(context).colorScheme.onPrimary.withValues(alpha: 0.2)
+                              ? Theme.of(context)
+                                  .colorScheme
+                                  .onPrimary
+                                  .withValues(alpha: 0.2)
                               : color.withValues(alpha: 0.2),
                           shape: BoxShape.circle,
                         ),
@@ -82,24 +99,27 @@ class AttendanceTabs extends StatelessWidget {
                           width: 20,
                           height: 20,
                           colorFilter: ColorFilter.mode(
-                            selected ? Theme.of(context).colorScheme.onPrimary : color,
+                            selected
+                                ? Theme.of(context).colorScheme.onPrimary
+                                : color,
                             BlendMode.srcIn,
                           ),
-
                           placeholderBuilder: (context) =>
-                              const CircularProgressIndicator(strokeWidth: 1.5),
+                              const CircularProgressIndicator(
+                                  strokeWidth: 1.5),
                         ),
                       ),
                     ],
                   ),
-
                   const Spacer(),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       label,
                       style: TextStyle(
-                        color: selected ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface,
+                        color: selected
+                            ? Theme.of(context).colorScheme.onPrimary
+                            : Theme.of(context).colorScheme.onSurface,
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
                       ),
@@ -121,6 +141,7 @@ class AttendanceTabs extends StatelessWidget {
           onTap: () => provider.setSelectedTab(AttendanceTab.total),
           iconPath: AppIcons.totalEmployees,
           color: AppColors.mediumBlue,
+          selectedColor: AppColors.mediumBlue,
           headerTop: 'Total',
           headerBottom: 'Employees',
         ),
@@ -131,6 +152,7 @@ class AttendanceTabs extends StatelessWidget {
           onTap: () => provider.setSelectedTab(AttendanceTab.present),
           iconPath: AppIcons.present,
           color: AppColors.mediumBlue,
+          selectedColor: AppColors.mediumBlue,
           headerTop: 'Present',
           headerBottom: 'Employees',
         ),
@@ -141,6 +163,7 @@ class AttendanceTabs extends StatelessWidget {
           onTap: () => provider.setSelectedTab(AttendanceTab.absent),
           iconPath: AppIcons.absent,
           color: Colors.red,
+          selectedColor: Colors.red,
           headerTop: 'Absent',
           headerBottom: 'Employees',
         ),

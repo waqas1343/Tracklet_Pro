@@ -48,7 +48,9 @@ class RateHistoryFilterWidget extends StatelessWidget {
             ),
             style: const TextStyle(fontSize: 12, color: Colors.black87),
             dropdownColor: Colors.white,
-            value: provider.selectedMonth.isEmpty ? null : provider.selectedMonth,
+            initialValue: provider.selectedMonth.isEmpty
+                ? null
+                : provider.selectedMonth,
             items: ["Sep", "Oct", "Nov", "Dec"]
                 .map(
                   (month) => DropdownMenuItem(
@@ -85,7 +87,9 @@ class RateHistoryFilterWidget extends StatelessWidget {
             ),
             style: const TextStyle(fontSize: 12, color: Colors.black87),
             dropdownColor: Colors.white,
-            value: provider.selectedRate.isEmpty ? null : provider.selectedRate,
+            initialValue: provider.selectedRate.isEmpty
+                ? null
+                : provider.selectedRate,
             items: ["200", "250", "260", "264"]
                 .map(
                   (rate) => DropdownMenuItem(

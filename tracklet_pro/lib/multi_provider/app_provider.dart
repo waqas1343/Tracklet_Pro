@@ -5,7 +5,7 @@ import 'package:tracklet_pro/features/auth/presentation/providers/login_provider
 import 'package:tracklet_pro/features/language_selection/providers/language_provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/bottom_navbar/provider/bottom_nav_provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/providers/plant_summary_provider.dart';
-import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/provider/employe_provider.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/employee/provider/employee_provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/rates_screen/provider/rate_provider/rate_provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/order/presentation/provider/order_provider.dart';
 import 'package:tracklet_pro/features/plant/presentation/screens/setting_screen/provider/sales_summary_provider.dart';

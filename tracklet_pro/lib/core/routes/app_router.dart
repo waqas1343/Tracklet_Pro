@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tracklet_pro/features/plant/presentation/bottom_navbar/plant_bottom_navbar.dart';
-import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/employe_screen.dart';
+import 'package:tracklet_pro/features/plant/presentation/screens/employee/employee_screen.dart';
 
 class AppRoutes {
   static const String home = '/';

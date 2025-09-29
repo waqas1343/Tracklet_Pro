@@ -27,11 +27,10 @@ class ProfileHeader extends StatelessWidget {
           onPressed: () async {
             final result = await showDownloadReportDialog(context);
             if (result != null) {
-              // TODO: Replace with real export action (PDF/CSV)
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(
-                    'Export: ${result.isDaily ? 'Daily' : 'Custom'} - ${result.date.day.toString().padLeft(2, '0')}-${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][result.date.month - 1]}-${(result.date.year % 100).toString().padLeft(2, '0')}',
+                    'Export: ${result.isDaily ? 'Daily' : 'Custom'} - ${result.date.day.toString().padLeft(2, '0')}-${['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][result.date.month - 1]}-${(result.date.year % 100).toString().padLeft(2, '0')}',
                   ),
                 ),
               );

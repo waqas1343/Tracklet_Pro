@@ -18,7 +18,7 @@ class PlantSummaryRow extends StatelessWidget {
       children: [
         Expanded(
           child: SummaryTab(
-            value: '${(homeProvider.availableStockKg / 1000).toStringAsFixed(1)}',
+            value: (homeProvider.availableStockKg / 1000).toStringAsFixed(1),
             label: 'Tons',
             iconPath: AppIcons.totalEmployees,
             color: const Color(0xFF0A3161),

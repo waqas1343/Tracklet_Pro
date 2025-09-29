@@ -15,49 +15,47 @@ class SettingProvider extends ChangeNotifier {
   }
 
   Future<void> onManagePlant(BuildContext context) async {
-    await Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => const ManagePlantScreen()),
-    );
+    await Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (_) => const ManagePlantScreen()));
   }
 
   Future<void> onSalesSummary(BuildContext context) async {
-    await Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => const SalesSummaryScreen()),
-    );
+    await Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (_) => const SalesSummaryScreen()));
   }
 
-  Future<void> onProfileSettings() async {
-    // TODO: Navigate to Profile Settings screen
-  }
+  Future<void> onProfileSettings() async {}
 
-  Future<void> onChangePassword() async {
-    // TODO: Navigate to Change Password screen
-  }
+  Future<void> onChangePassword() async {}
 
-  Future<void> onDownloadReports(BuildContext context) async {
-    // This will be wired from the screen using the download dialog utility
-  }
+  Future<void> onDownloadReports(BuildContext context) async {}
 
   Future<void> onLegalNotice(BuildContext context) async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Legal Notice tapped')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Legal Notice tapped')));
   }
 
   Future<void> onPrivacyPolicy(BuildContext context) async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Privacy Policy tapped')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Privacy Policy tapped')));
   }
 
   Future<void> logout(BuildContext context) async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Logged out')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Logged out')));
   }
 
   String _makeInitials(String name) {
-    final parts = name.trim().split(RegExp(r"\s+")).where((e) => e.isNotEmpty).toList();
+    final parts = name
+        .trim()
+        .split(RegExp(r"\s+"))
+        .where((e) => e.isNotEmpty)
+        .toList();
     if (parts.isEmpty) return 'U';
     if (parts.length == 1) return parts.first[0].toUpperCase();
     return (parts[0][0] + parts[1][0]).toUpperCase();

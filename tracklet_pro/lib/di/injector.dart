@@ -1,4 +1,5 @@
-import 'package:tracklet_pro/features/plant/presentation/screens/order/data/repositories/order_repository.dart';
+import 'package:tracklet_pro/features/plant/domain/repositories/order_repository.dart';
+import 'package:tracklet_pro/features/plant/domain/repositories/order_repository_impl.dart';
 
 /// Simple app-level injector (service locator)
 /// Replace with get_it later if needed without changing call sites.
@@ -8,7 +9,7 @@ class Injector {
   static late final OrderRepository _orderRepository;
 
   static void init() {
-    _orderRepository = OrderRepository();
+    _orderRepository = OrderRepositoryImpl();
   }
 
   static OrderRepository get orderRepository => _orderRepository;

@@ -1,3 +1,4 @@
+// SECTION: Model - Employee
 class EmployeeModel {
   final String id;
   final String name;
@@ -14,6 +15,7 @@ class EmployeeModel {
     String? status,
     this.lateTime,
   }) : status = status ?? (isPresent == true ? 'present' : isPresent == false ? 'absent' : 'unmarked');
+
   void setPresent() {
     isPresent = true;
     status = 'present';
@@ -25,7 +27,7 @@ class EmployeeModel {
     status = 'absent';
     lateTime = null;
   }
-  
+
   bool get isAttendanceMarked => isPresent != null;
 
   void setLate(DateTime time) {

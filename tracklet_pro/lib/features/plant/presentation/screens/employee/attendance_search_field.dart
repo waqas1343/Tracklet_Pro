@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tracklet_pro/features/plant/presentation/screens/employe_screen/provider/employe_provider.dart';
+import 'provider/employee_provider.dart';
 
+// SECTION: UI - Search field for employees
 class AttendanceSearchField extends StatelessWidget {
   const AttendanceSearchField({super.key});
 
