@@ -6,22 +6,38 @@ class TopPlantsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final screenWidth = screenSize.width;
+
+    // Responsive dimensions
+    final titleFontSize = screenWidth * 0.045; // 4.5% of screen width
+    final cardHeight = screenWidth * 0.54; // 50% of screen width
+
     return Column(
       children: [
         Row(
-          children: const [
+          children: [
             Expanded(
               child: Text(
                 "Top Plants",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: titleFontSize,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-            Text("See all", style: TextStyle(color: Colors.blue)),
+            Text(
+              "See all",
+              style: TextStyle(
+                color: Colors.blue,
+                fontSize: titleFontSize * 0.8,
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 10),
         SizedBox(
-          height: 200,
+          height: cardHeight,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: const [
