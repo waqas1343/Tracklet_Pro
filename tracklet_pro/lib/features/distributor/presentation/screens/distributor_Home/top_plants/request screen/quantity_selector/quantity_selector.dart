@@ -12,6 +12,7 @@ class QuantitySelector extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<DistributorRequestProvider>(context);
     final qty = provider.quantities[weight] ?? 0;
+    final String buttonId = 'minus_${weight}';
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -20,24 +21,34 @@ class QuantitySelector extends StatelessWidget {
         Row(
           children: [
             GestureDetector(
+              onTapDown: (_) => provider.setPressedButton(buttonId),
+              onTapUp: (_) => provider.clearPressedButton(),
+              onTapCancel: () => provider.clearPressedButton(),
               onTap: () => provider.decreaseQty(weight),
               child: Icon(
                 Icons.remove_circle_outline,
-                color: AppColors.darkBlue,
+                color: provider.isButtonPressed(buttonId)
+                    ? AppColors.darkBlue
+                    : AppColors.disabledColor,
                 size: 20,
               ),
             ),
-            SizedBox(width: 8),
+            const SizedBox(width: 8),
             Text(
               qty.toString().padLeft(2, '0'),
               style: const TextStyle(fontSize: 16),
             ),
-            SizedBox(width: 8),
+            const SizedBox(width: 8),
             GestureDetector(
+              onTapDown: (_) => provider.setPressedButton('plus_${weight}'),
+              onTapUp: (_) => provider.clearPressedButton(),
+              onTapCancel: () => provider.clearPressedButton(),
               onTap: () => provider.increaseQty(weight),
               child: Icon(
                 Icons.add_circle_outline,
-                color: Colors.grey,
+                color: provider.isButtonPressed('plus_${weight}')
+                    ? AppColors.darkBlue
+                    : Colors.grey,
                 size: 20,
               ),
             ),

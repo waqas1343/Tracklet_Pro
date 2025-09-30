@@ -33,6 +33,22 @@ class DistributorRequestProvider extends ChangeNotifier {
     return price;
   }
 
+  String? _pressedButton; // Track which button is pressed
+
+  void setPressedButton(String buttonId) {
+    _pressedButton = buttonId;
+    notifyListeners();
+  }
+
+  void clearPressedButton() {
+    _pressedButton = null;
+    notifyListeners();
+  }
+
+  bool isButtonPressed(String buttonId) {
+    return _pressedButton == buttonId;
+  }
+
   void setDiscount(int value) {
     discount = value;
     notifyListeners();

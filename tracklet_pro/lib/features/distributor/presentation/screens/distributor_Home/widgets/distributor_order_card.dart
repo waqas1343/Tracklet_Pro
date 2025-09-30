@@ -30,8 +30,7 @@ class DistributorOrderCard extends StatelessWidget {
     final statusFontSize = screenWidth * 0.03; // 3% of screen width
     final chipFontSize = screenWidth * 0.032; // 3.2% of screen width
 
-    Color statusColor =
-        status == "Completed" ? Colors.green : Colors.orange;
+    Color statusColor = status == "Completed" ? Colors.green : Colors.orange;
 
     return Container(
       margin: EdgeInsets.only(bottom: cardPadding),
@@ -62,7 +61,7 @@ class DistributorOrderCard extends StatelessWidget {
                   vertical: cardPadding * 0.3,
                 ),
                 decoration: BoxDecoration(
-                  color: statusColor.withOpacity(0.2),
+                  color: statusColor,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
@@ -73,7 +72,7 @@ class DistributorOrderCard extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-              )
+              ),
             ],
           ),
           SizedBox(height: cardPadding * 0.5),
@@ -114,17 +113,19 @@ class DistributorOrderCard extends StatelessWidget {
           Wrap(
             spacing: 8,
             children: requestedItems
-                .map((item) => Chip(
-                      label: Text(
-                        item,
-                        style: TextStyle(
-                          fontSize: chipFontSize,
-                          color: Colors.white,
-                        ),
+                .map(
+                  (item) => Chip(
+                    label: Text(
+                      item,
+                      style: TextStyle(
+                        fontSize: chipFontSize,
+                        color: Colors.white,
                       ),
-                      backgroundColor: Colors.black,
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    ))
+                    ),
+                    backgroundColor: Colors.black,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                )
                 .toList(),
           ),
           SizedBox(height: cardPadding),
